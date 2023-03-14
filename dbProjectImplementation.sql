@@ -14,6 +14,7 @@ PRIMARY KEY (name)
 -- Schema for Hotel
 CREATE TABLE hotel (
 hotel_id VARCHAR(5) NOT NULL,
+name VARCHAR(30) NOT NULL,
 address VARCHAR(30) NOT NULL UNIQUE,
 star_rating NUMERIC(1,1) CHECK (star_rating BETWEEN 0 AND 5),
 contact_email VARCHAR(30) NOT NULL,
@@ -30,6 +31,7 @@ SSN CHAR(9) NOT NULL,
 address VARCHAR(30) NOT NULL,
 full_name VARCHAR(40) NOT NULL,
 position VARCHAR(25) NOT NULL,
+hotel_id VARCHAR(5) NOT NULL,
 PRIMARY KEY(SSN),
 FOREIGN KEY(hotel_id) REFERENCES hotel(hotel_id) 
 );
@@ -46,8 +48,10 @@ PRIMARY KEY(SSN)
 -- Schema for Booking
 CREATE TABLE booking (
 booking_ID CHAR(5) NOT NULL,
+room_number INTEGER NOT NULL,
 start_date DATE NOT NULL,
 end_date DATE NOT NULL,
+full_name VARCHAR(40) NOT NULL, 
 PRIMARY KEY(booking_id),
 FOREIGN KEY(room_number) REFERENCES room(room_number),
 FOREIGN KEY(full_name) REFERENCES customer(full_name)
@@ -55,8 +59,11 @@ FOREIGN KEY(full_name) REFERENCES customer(full_name)
 
 -- Schema for Renting
 CREATE TABLE renting (
+room_number INTEGER NOT NULL,
 check_in_date DATE NOT NULL,
 check_out_date DATE NOT NULL,
+booking_ID CHAR(5) NOT NULL,
+full_name VARCHAR(40) NOT NULL,
 FOREIGN KEY(room_number) REFERENCES room(room_number),
 FOREIGN KEY(booking_id) REFERENCES booking(booking_id),
 FOREIGN KEY(full_name) REFERENCES customer(full_name)
@@ -71,6 +78,7 @@ capacity INTEGER NOT NULL CHECK (capacity > 0),
 view BOOLEAN NOT NULL,
 extendable BOOLEAN NOT NULL,
 problems VARCHAR(40),
+name VARCHAR(30) NOT NULL,
 PRIMARY KEY(room_number),
 FOREIGN KEY(name) REFERENCES hotel(name)
 );
