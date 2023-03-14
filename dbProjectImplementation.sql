@@ -29,7 +29,7 @@ FOREIGN KEY(name) REFERENCES hotel_chain(name)
 CREATE TABLE hotel (
 hotel_id CHAR(5) NOT NULL,
 name VARCHAR(30) NOT NULL,
-address VARCHAR(30) NOT NULL UNIQUE,
+address VARCHAR(50) NOT NULL UNIQUE,
 star_rating NUMERIC(1,1) CHECK (star_rating BETWEEN 0 AND 5),
 contact_email VARCHAR(30) NOT NULL,
 phone_number CHAR(12) NOT NULL UNIQUE,
@@ -114,7 +114,7 @@ DROP TABLE renting;
 -- Insert into hotel_chain
 INSERT INTO hotel_chain VALUES ('Comfy Resort Corporation', 8, '23 Cronic Depression St, Ottawa, ON'),
 							('Paradise Beach Inc', 8, '43 Trace Road, Ottawa, ON'),
-                            ('Cosmopolitan Ltd.', 8, 'Forest Hill Garden, Toronto, ON'),
+                            ('Cosmopolitan Ltd', 8, 'Forest Hill Garden, Toronto, ON'),
                             ('Ocean River Corporation', 9, '40 Colten Union, Vancouver, BC'),
                             ('Green Palm Inc', 10, '32 Winifred Lodge, Montreal, QC');
                             
@@ -169,5 +169,26 @@ INSERT INTO hotel VALUES ('00034', 'Green Palm Suite 1', '60 Winifred Road, Mont
                         ('00043', 'Green Palm Suite 10', '69 Winifred Road, Montreal, QC', 3.4, 'GreenPalm10@gmail.com', '234-345-971', 5, 'Harmony Griffin');
 
 
-
+INSERT INTO phone_numbers VALUES ('Comfy Resort Corporation', '412-325-324'), 
+								('Comfy Resort Corporation', '416-234-6876'),
+                                ('Paradise Beach Inc', '231-000-3100'),
+                                ('Paradise Beach Inc', '211-321-3019'),
+                                ('Cosmopolitan Ltd', '123-539-1432'),
+                                ('Cosmopolitan Ltd', '923-534-1249'),
+                                ('Ocean River Corporation', '123-243-1243'),
+                                ('Ocean River Corporation', '543-283-6750'),
+                                ('Green Palm Inc', '234-351-2359'),
+                                ('Green Palm Inc', '206-123-3509');
+                                
+INSERT INTO contact_email_addresses VALUES ('Comfy Resort Corporation', 'ComfyResort1@gmail.com'), 
+								('Comfy Resort Corporation', 'ComfyResort2gmail.com'),
+                                ('Paradise Beach Inc', 'ParadiseBeach1@gmail.com'),
+                                ('Paradise Beach Inc', 'ParadiseBeach2@gmail.com'),
+                                ('Cosmopolitan Ltd', 'CosmopolitanLtd1@gmail.com'),
+                                ('Cosmopolitan Ltd', 'CosmopolitanLtd2@gmail.com'),
+                                ('Ocean River Corporation', 'OceanRiver1@gmail.com'),
+                                ('Ocean River Corporation', 'OceanRiver2@gmail.com'),
+                                ('Green Palm Inc', 'GreenPalm1@gmail.com'),
+                                ('Green Palm Inc', 'GreenPalm2@gmail.com');
+                                
 
