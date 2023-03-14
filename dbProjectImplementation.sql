@@ -15,14 +15,14 @@ PRIMARY KEY (name)
 CREATE TABLE phone_numbers (
 name VARCHAR(30) NOT NULL,
 phone_number CHAR(12) NOT NULL UNIQUE,
-FOREIGN KEY(name) REFERENCES hotel_chain(name)
+FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
  );
  
 -- Schema for multivalued-attribute contact_email_address
 CREATE TABLE contact_email_addresses (
 name VARCHAR(30) NOT NULL,
 contact_email_address VARCHAR(30) NOT NULL UNIQUE,  
-FOREIGN KEY(name) REFERENCES hotel_chain(name)
+FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
 );
 
 -- Schema for Hotel
@@ -36,7 +36,7 @@ phone_number CHAR(12) NOT NULL UNIQUE,
 number_of_rooms INTEGER NOT NULL CHECK (number_of_rooms > 0),
 manager VARCHAR(15) UNIQUE NOT NULL,
 PRIMARY KEY (hotel_id),
-FOREIGN KEY(name) REFERENCES hotel_chain(name)
+FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
 );
 
 -- Schema for Employee
@@ -47,7 +47,7 @@ full_name VARCHAR(40) NOT NULL,
 position VARCHAR(25) NOT NULL,
 hotel_id CHAR(5) NOT NULL,
 PRIMARY KEY(SSN),
-FOREIGN KEY(hotel_id) REFERENCES hotel(hotel_id) 
+FOREIGN KEY(hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE
 );
 
 -- Schema for Customer
@@ -70,7 +70,7 @@ extendable BOOLEAN NOT NULL,
 problems VARCHAR(40),
 name VARCHAR(30) NOT NULL,
 PRIMARY KEY(room_number),
-FOREIGN KEY(name) REFERENCES hotel(name)
+FOREIGN KEY(name) REFERENCES hotel(name) ON DELETE CASCADE
 );
 
 -- Schema for Booking
@@ -81,8 +81,8 @@ start_date DATE NOT NULL,
 end_date DATE NOT NULL,
 customer_ID CHAR(9) NOT NULL,
 PRIMARY KEY(booking_id),
-FOREIGN KEY(room_number) REFERENCES room(room_number),
-FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID)
+FOREIGN KEY(room_number) REFERENCES room(room_number) ON DELETE CASCADE, 
+FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID) ON DELETE CASCADE
 );
 
 -- Schema for Renting
@@ -92,9 +92,9 @@ check_in_date DATE NOT NULL,
 check_out_date DATE NOT NULL,
 booking_ID CHAR(5) NOT NULL,
 customer_ID CHAR(9) NOT NULL,
-FOREIGN KEY(room_number) REFERENCES room(room_number),
-FOREIGN KEY(booking_id) REFERENCES booking(booking_id),
-FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID)
+FOREIGN KEY(room_number) REFERENCES room(room_number) ON DELETE CASCADE,
+FOREIGN KEY(booking_id) REFERENCES booking(booking_id) ON DELETE CASCADE,
+FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID) ON DELETE CASCADE
 );
 
 /*
