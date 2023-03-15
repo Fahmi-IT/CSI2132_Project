@@ -24,16 +24,6 @@ END;
 $$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER update_Hotel_Chain --trigger on hotel deletion
-AFTER DELETE ON hotel
-FOR EACH ROW
-EXECUTE PROCEDURE decrease_Hotel_Count(); --executes function
-
-CREATE TRIGGER update_Hotel --trigger on room deletion
-AFTER DELETE ON room
-FOR EACH ROW
-EXECUTE PROCEDURE decrease_Room_Count(); --executes function
-
 CREATE OR REPLACE FUNCTION increase_Hotel_Count()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -53,3 +43,23 @@ BEGIN
 	RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER decrease_Hotel_Count --trigger on hotel deletion
+AFTER DELETE ON hotel
+FOR EACH ROW
+EXECUTE PROCEDURE decrease_Hotel_Count(); --executes function
+
+CREATE TRIGGER decrease_Room_Count --trigger on room deletion
+AFTER DELETE ON room
+FOR EACH ROW
+EXECUTE PROCEDURE decrease_Room_Count(); --executes function
+
+CREATE TRIGGER increase_Hotel_Count
+AFTER INSERT ON hotel
+FOR EACH ROW
+EXECUTE PROCEDURE increase_Hotel_Count();
+
+CREATE TRIGGER increase_Room_Count
+AFTER INSERT ON room
+FOR EACH ROW
+EXECUTE PROCEDURE increase_Room_Count();
