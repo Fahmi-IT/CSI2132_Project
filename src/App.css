@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar {
+  position: sticky;
+  top: 0;
+}
+
+.loading {/*css for loading screen*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}

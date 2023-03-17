@@ -1,3 +1,4 @@
+/*JS for Loading Screen*/
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
@@ -7,7 +8,7 @@ function PreLoader1() {
 
   useEffect(() => {
     setTimeout(() => {
-        fetch("https://jsonplaceholder.typicode.com/posts")
+      fetch("https://jsonplaceholder.typicode.com/posts")
         .then((response) => response.json())
         .then((json) => {
           console.log(json);

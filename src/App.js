@@ -1,13 +1,17 @@
 import React from "react";
 import "./App.css";
-import PreLoader1 from "./components/PreLoader1"
+import PreLoader1 from "./components/LoadingScreen/PreLoader1"
+import NavigationBar from "./components/NavBar/NavigationBar"
 
 function App() {
   return (
     <div className="App">
-        <header className="AppHeader">
-            <PreLoader1/>
-        </header>
+        <div class="navbar">
+          <NavigationBar/>
+        </div>
+        <div class="loading">
+          <PreLoader1/>
+        </div>
     </div>
   )
 }
