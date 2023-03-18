@@ -41,18 +41,18 @@ FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
 
 -- Schema for Employee
 CREATE TABLE employee (
-SSN CHAR(9) NOT NULL,
+employee_ID CHAR(9) NOT NULL, -- CHANGED TO ID (ABSTRACTION) 
 address VARCHAR(30) NOT NULL,
 full_name VARCHAR(40) NOT NULL,
 position VARCHAR(25) NOT NULL,
 hotel_id CHAR(5) NOT NULL,
-PRIMARY KEY(SSN),
+PRIMARY KEY(employee_ID),
 FOREIGN KEY(hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE
 );
 
 -- Schema for Customer
 CREATE TABLE customer (
-customer_ID CHAR(9) NOT NULL,
+customer_ID CHAR(9) NOT NULL, -- Add passowrd for both customer and employee ASK FOR EMAIL AND GIVE THEM AN ID AND DON'T KEEP THE EMAIL
 address VARCHAR(30) NOT NULL,
 full_name VARCHAR(40) NOT NULL, 
 date_of_registration DATE NOT NULL,
@@ -70,7 +70,7 @@ extendable BOOLEAN NOT NULL,
 problems VARCHAR(40),
 name VARCHAR(30) NOT NULL,
 PRIMARY KEY(room_number),
-FOREIGN KEY(name) REFERENCES hotel(name) ON DELETE CASCADE
+FOREIGN KEY(name) REFERENCES hotel(hotel_ID) ON DELETE CASCADE
 );
 
 -- Schema for Booking
@@ -190,5 +190,5 @@ INSERT INTO contact_email_addresses VALUES ('Comfy Resort Corporation', 'ComfyRe
                                 ('Ocean River Corporation', 'OceanRiver2@gmail.com'),
                                 ('Green Palm Inc', 'GreenPalm1@gmail.com'),
                                 ('Green Palm Inc', 'GreenPalm2@gmail.com');
-                                
+
 
