@@ -1,6 +1,6 @@
 import React from 'react';
   
-const About = () => {
+const Search = () => {
   return (
     <div
       style={{
@@ -10,9 +10,9 @@ const About = () => {
         height: '100vh'
       }}
     >
-      <h1>Nothing.</h1>
+      <h1>Searching for someone new.</h1>
     </div>
   );
 };
   
-export default About;
+export default Search;

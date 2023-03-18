@@ -1,6 +1,6 @@
 import React from 'react';
   
-const About = () => {
+const Hotels = () => {
   return (
     <div
       style={{
@@ -10,9 +10,9 @@ const About = () => {
         height: '100vh'
       }}
     >
-      <h1>Nothing.</h1>
+      <h1>Hotel? Trivago.</h1>
     </div>
   );
 };
   
-export default About;
+export default Hotels;

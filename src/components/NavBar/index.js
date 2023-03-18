@@ -15,15 +15,24 @@ const NavBar = () => {
         <Bars />
   
         <NavMenu>
-          <NavLink to='/booking' activeStyle>
-            Booking
+          <NavLink to='/' exact activeStyle>
+            Home
           </NavLink>
           <NavLink to='/about' activeStyle>
             About
           </NavLink>
+          <NavLink to='/booking' activeStyle>
+            Booking
+          </NavLink>
+          <NavLink to='/hotels' activeStyle>
+            Hotels
+          </NavLink>
+          <NavLink to='/search' activeStyle>
+            Search
+          </NavLink>
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+          <NavBtnLink to='/signup'>Sign Up</NavBtnLink>
         </NavBtn>
       </Nav>
     </>
