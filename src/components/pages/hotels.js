@@ -28,17 +28,6 @@ function Hotels() {
   return (
     <>
       <h3 className="infoTitle">Our wonderful locations</h3>
-      {/* <div className="about-us">
-        <div className="row">
-          <Team />
-          <Mission />
-          <Partners />
-        </div>
-        <div className="row">
-          <History />
-        </div>
-      </div> */}
-
       <div className="locations">
         <div className="grid">
           <LocationCard

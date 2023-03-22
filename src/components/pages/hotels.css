@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
 .locations {
   height: 300vh;
   padding-top: 0;
@@ -22,11 +29,9 @@
 .grid-item {
   background-color: #fff;
   border-radius: 0.4rem;
-
   box-shadow: 0 3rem 6rem rgba(25, 53, 176, 0.1);
   height: 40rem;
   margin: auto;
-
   transition: 0.2s;
   border-radius: 20px;
 }

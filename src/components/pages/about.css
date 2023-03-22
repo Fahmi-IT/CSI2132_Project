@@ -1,19 +1,9 @@
 * {
   margin: 0;
   padding: 0;
-  color: #fff;
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
-
-/* .content {
-  width: 100%;
-  background: #ffffff;
-  height: 400vh;
-  z-index: 2;
-  position: absolute;
-  overflow: scroll;
-} */
 
 h3,
 h4 {
@@ -28,9 +18,8 @@ h4 {
   font-size: 2.5rem;
 }
 
-/* about us  */
-
 .about-us {
+  padding-top: 4rem;
   padding-left: 12rem;
   padding-right: 12rem;
 }
