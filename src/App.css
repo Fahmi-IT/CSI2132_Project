@@ -43,22 +43,25 @@
   top: 0;
 }
 
-.loading {/*css for loading screen*/
+.loading {
+  /*css for loading screen*/
   z-index: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  position: absolute;
 }
 
 .homeImage {
   z-index: 1;
   position: absolute;
   align-items: center;
-  top:85px;
+  top: 85px;
 }
 
-html, body {
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
 }
