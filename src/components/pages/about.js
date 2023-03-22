@@ -2,9 +2,7 @@ import React from "react";
 import "./about.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCoffee,
   faGlobe,
-  faHistory,
   faRocket,
   faScroll,
   faUser,
@@ -29,7 +27,6 @@ import {
 function About() {
   return (
     <>
-      {/* <div className="content"> */}
       <h3 className="infoTitle">A little about us</h3>
       <div className="about-us">
         <div className="row">
@@ -41,7 +38,6 @@ function About() {
           <History />
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }
