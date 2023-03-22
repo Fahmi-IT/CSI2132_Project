@@ -1,5 +1,14 @@
 import React from "react";
 import "./about.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCoffee,
+  faGlobe,
+  faHistory,
+  faRocket,
+  faScroll,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 // const About = () => {
 //   return (
 //     <div
@@ -42,7 +51,7 @@ function Team() {
     <div className="column">
       <div className="card">
         <div className="icon">
-          <i class="fa-solid fa-user"></i>
+          <FontAwesomeIcon icon={faUser} />
         </div>
         <h3>Our Team</h3>
         <p>
@@ -61,14 +70,15 @@ function Mission() {
     <div className="column">
       <div className="card">
         <div className="icon">
-          <i class="fa-solid fa-rocket"></i>
+          <FontAwesomeIcon icon={faRocket} />
         </div>
         <h3>Our Mission</h3>
         <p>
           Our mission is to make hotel booking easy, accessible and affordable
           for everyone. We strive to offer a user-friendly platform that allows
           our customers to quickly and easily find the best hotels at the best
-          prices, while providing exceptional customer service.
+          prices, while upholding the highest standards of integrity in
+          everything we do.
         </p>
       </div>
     </div>
@@ -80,7 +90,7 @@ function Partners() {
     <div className="column">
       <div className="card">
         <div className="icon">
-          <i class="fa-solid fa-globe"></i>
+          <FontAwesomeIcon icon={faGlobe} />
         </div>
         <h3>Our Partners</h3>
         <p>
@@ -99,7 +109,7 @@ function History() {
   return (
     <div className="card card3">
       <div className="icon">
-        <i class="fa-solid fa-globe"></i>
+        <FontAwesomeIcon icon={faScroll} />
       </div>
       <h3>Our History</h3>
       <p>
