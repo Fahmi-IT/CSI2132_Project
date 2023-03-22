@@ -1,11 +1,8 @@
 .locations {
   height: 300vh;
-  /* padding-left: 15rem;
-  padding-right: 15rem; */
   padding-top: 0;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .infoTitle {
@@ -20,9 +17,6 @@
   display: grid;
   grid-column-gap: 6rem;
   grid-template-columns: repeat(3, 25rem);
-  /* align-items: center; */
-  /* place-items: center; */
-  /* margin:  auto; */
 }
 
 .grid-item {

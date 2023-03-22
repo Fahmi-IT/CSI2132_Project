@@ -7,6 +7,8 @@ import quebecCityimg from "./locationImg/loc4.jpg";
 import ottawaimg from "./locationImg/loc5.jpg";
 import halifaximg from "./locationImg/loc6.jpg";
 import edmontonimg from "./locationImg/loc7.jpg";
+import saskatoonimg from "./locationImg/loc8.jpg";
+import niagaraFallsimg from "./locationImg/loc9.jpg";
 // const Hotels = () => {
 //   return (
 //     <div
@@ -92,6 +94,19 @@ function Hotels() {
             imageAlt="Picture of Edmonton"
             locationName="Edmonton"
             locationDescription="A gorgeous capital city of Alberta, known for its beautiful river valley, vibrant arts and cultural scene, and long winter season."
+          />
+
+          <LocationCard
+            imageSrc={saskatoonimg}
+            imageAlt="Picture of Saskatoon"
+            locationName="Saskatoon"
+            locationDescription="A vibrant city located in the heart of Saskatchewan known for its beautiful river valley, rich cultural heritage, and friendly people."
+          />
+          <LocationCard
+            imageSrc={niagaraFallsimg}
+            imageAlt="Picture of Niagara Falls"
+            locationName="Niagara Falls"
+            locationDescription="A stunning city located in Ontario, Canada, known for its breathtaking waterfalls, vibrant tourist attractions, and scenic views."
           />
         </div>
       </div>
