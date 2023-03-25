@@ -1,0 +1,49 @@
+  .homeImage {
+    z-index: 1;
+    position: absolute;
+    align-items: center;
+    top: 85px;
+  }
+  
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .welcome {
+    z-index: 2;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    text-align: center;
+    margin-left: 45%;
+    margin-top: 500px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 42px;
+  }
+
+  .main-body {
+    position: absolute;
+    margin-top: 1030px;
+    margin-left: 11.8%;
+  }
+
+  .locText {
+    font-size: 36px;
+  }
+
+  .locImage {
+    width: 330px;
+    height: 300px;
+    margin-left: 25px;
+    border-radius: 12px;
+  }
+
+  .row1 {
+    margin-top: 50px;
+  }
+
+  .row2 {
+    margin-top: 25px;
+  }

@@ -1,4 +1,5 @@
 import React from 'react';
+import "./index.css";
 import banffImg from './images/banff-national-park-canada-shutterstock_309219305.jpg';
 import loc1 from "./images/loc1.jpg"
 import loc2 from "./images/loc2.jpg"
@@ -13,7 +14,7 @@ const Home = () => {
       <div class="homeImage">
       <img src={banffImg} alt="Banff, Canada"></img>
       </div>
-      <h3 class="Welcome">Welcome.</h3>
+      <h3 class="welcome">Welcome.</h3>
       <div class="main-body">
         <h3 class="locText">View our wonderful locations!</h3>
         <div class="row1">
