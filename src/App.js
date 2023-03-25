@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import PreLoader1 from "./components/LoadingScreen/PreLoader1"
 import NavBar from './components/NavBar';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Home from './components/pages/index';
@@ -35,9 +34,6 @@ function App() {
               <SignUp />
             </Route>
           </Router>
-        </div>
-        <div class="loading">
-          <PreLoader1/>
         </div>
     </div>
     </>

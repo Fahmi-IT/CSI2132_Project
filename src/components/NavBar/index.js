@@ -3,17 +3,15 @@ import {
   Nav,
   NavLink,
   Bars,
-  NavMenu,
-  NavBtn,
-  NavBtnLink,
+  NavMenu
 } from './NavBarElements';
   
 const NavBar = () => {
   return (
     <>
       <Nav>
+        <p class="logo">Aruma Booking System</p>
         <Bars />
-  
         <NavMenu>
           <NavLink to='/' exact activeStyle>
             Home
@@ -30,10 +28,10 @@ const NavBar = () => {
           <NavLink to='/search' activeStyle>
             Search
           </NavLink>
+          <NavLink to='/signup' activeStyle>
+            Sign Up
+          </NavLink>
         </NavMenu>
-        <NavBtn>
-          <NavBtnLink to='/signup'>Sign Up</NavBtnLink>
-        </NavBtn>
       </Nav>
     </>
   );
