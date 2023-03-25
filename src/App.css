@@ -43,22 +43,25 @@
   top: 0;
 }
 
-.loading {/*css for loading screen*/
+.loading {
+  /*css for loading screen*/
   z-index: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  position: absolute;
 }
 
 .homeImage {
   z-index: 1;
   position: absolute;
   align-items: center;
-  top:85px;
+  top: 85px;
 }
 
-html, body {
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -78,32 +81,4 @@ html, body {
 
 body {
   overflow: hidden;
-}
-
-.logo {
-  margin-top: 30px;
-  color: white;
-}
-
-.main-body {
-  z-index: 1;
-  margin-top: 1080px;
-}
-
-.locImage {
-  width: 300px;
-  height: 300px;
-  padding: 20px;
-  border-radius: 30px;
-}
-
-.row2 {
-  margin-top: 10px;
-}
-
-.locText {
-  color: #0b56a6;
-  font-size: 36px;
-  font-family: Helvetica;
-  margin-left: 23px;
 }

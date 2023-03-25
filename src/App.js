@@ -1,17 +1,18 @@
 import React from "react";
 import "./App.css";
-import NavBar from './components/NavBar';
-import {BrowserRouter as Router, Route} from "react-router-dom";
-import Home from './components/pages/index';
-import About from './components/pages/about';
-import Booking from './components/pages/booking';
-import Hotels from './components/pages/hotels';
-import Search from './components/pages/search';
-import SignUp from './components/pages/signup';
+import NavBar from "./components/NavBar";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./components/pages/index";
+import About from "./components/pages/about";
+import Booking from "./components/pages/booking";
+import Hotels from "./components/pages/hotels";
+import Search from "./components/pages/search";
+import SignUp from "./components/pages/signup";
 
 function App() {
-  return (<>
-    <div className="App">
+  return (
+    <>
+      <div className="App">
         <div class="navbar">
           <Router>
             <NavBar />
@@ -35,9 +36,9 @@ function App() {
             </Route>
           </Router>
         </div>
-    </div>
+      </div>
     </>
-  )
+  );
 }
 
 export default App;
