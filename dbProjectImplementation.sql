@@ -40,7 +40,7 @@ FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
 -- Schema for Employee
 CREATE TABLE employee (
 SSN CHAR(9) NOT NULL, 
-address VARCHAR(30) NOT NULL,
+address VARCHAR(50) NOT NULL,
 full_name VARCHAR(40) NOT NULL,
 position VARCHAR(25) NOT NULL,
 hotel_ID CHAR(5) NOT NULL,
@@ -111,11 +111,11 @@ DROP TABLE renting;
 -- Inserting values into tables
 
 -- Insert into hotel_chain
-INSERT INTO hotel_chain VALUES ('Comfy Resort Corporation', 8, '23 Cronic Depression St, Ottawa, ON'),
-							('Paradise Beach Inc', 8, '43 Trace Road, Ottawa, ON'),
-                            ('Cosmopolitan Ltd', 8, 'Forest Hill Garden, Toronto, ON'),
-                            ('Ocean River Corporation', 9, '40 Colten Union, Vancouver, BC'),
-                            ('Green Palm Inc', 10, '32 Winifred Lodge, Montreal, QC');
+INSERT INTO hotel_chain VALUES ('Comfy Resort Corporation', 8, '23 Cronic Depression St, Ottawa ON'),
+							('Paradise Beach Inc', 8, '43 Trace Road, Ottawa ON'),
+                            ('Cosmopolitan Ltd', 8, 'Forest Hill Garden, Toronto ON'),
+                            ('Ocean River Corporation', 9, '40 Colten Union, Vancouver BC'),
+                            ('Green Palm Inc', 10, '32 Winifred Lodge, Montreal QC');
                             
 INSERT INTO hotel VALUES ('00001', 'Comfy Resort Corporation', '22 Richmond St, Ottawa ON', 3.5, 'ComfyBlock1@gmail.com', '647-333-2314', 5, 'Richard Moon'),
 						('00002', 'Comfy Resort Corporation', '23 Richmond St, Ottawa ON', 3.8, 'ComfyBlock2@gmail.com', '647-131-2433', 5, 'James Rob'),
@@ -153,14 +153,14 @@ INSERT INTO hotel VALUES ('00025', 'Ocean River Corporation', '11 Colten Union, 
                         ('00031', 'Ocean River Corporation', '17 Colten Union, Vancouver BC', 3.3, 'OceanBeach2@gmail.com', '193-453-0000', 5, 'Katherine Wills'),
                         ('00032', 'Ocean River Corporation', '18 Colten Union, Vancouver BC', 3.7, 'OceanBeach3@gmail.com', '248-384-1832', 5, 'Porter Gibbs');                        
 
-INSERT INTO hotel VALUES ('00033', 'Green Palm Inc', '60 Winifred Road, Montreal, QC', 3.3, 'GreenPalm1@gmail.com', '234-454-2913', 5, 'Lucas Klein'),
-						('00034', 'Green Palm Inc', '61 Winifred Road, Montreal, QC', 3.5, 'GreenPalm2@gmail.com', '234-234-234', 5, 'Antony Nelson'),
-                        ('00035', 'Green Palm Inc', '62 Winifred Road, Montreal, QC', 3.1, 'GreenPalm3@gmail.com', '235-345-2321', 5, 'Cindy Petty'),
-                        ('00036', 'Green Palm Inc', '63 Winifred Road, Montreal, QC', 3.1, 'GreenPalm4@gmail.com', '283-123-2222', 5, 'Alexa Burch'),
-                        ('00037', 'Green Palm Inc', '64 Winifred Road, Montreal, QC', 3.2, 'GreenPalm5@gmail.com', '234-324-8166', 5, 'John Dennis'),
-                        ('00038', 'Green Palm Inc', '65 Winifred Road, Montreal, QC', 3.7, 'GreenPalm6@gmail.com', '647-349-3299', 5, 'Blake Landry'),
-                        ('00039', 'Green Palm Inc', '66 Winifred Road, Montreal, QC', 3.9, 'GreenPalm7@gmail.com', '182-437-2732', 5, 'Clarissa Blair'),
-                        ('00040', 'Green Palm Inc', '67 Winifred Road, Montreal, QC', 3.2, 'GreenPalm8@gmail.com', '123-324-2348', 5, 'Deshwan Wheeler');
+INSERT INTO hotel VALUES ('00033', 'Green Palm Inc', '60 Winifred Road, Montreal QC', 3.3, 'GreenPalm1@gmail.com', '234-454-2913', 5, 'Lucas Klein'),
+						('00034', 'Green Palm Inc', '61 Winifred Road, Montreal QC', 3.5, 'GreenPalm2@gmail.com', '234-234-234', 5, 'Antony Nelson'),
+                        ('00035', 'Green Palm Inc', '62 Winifred Road, Montreal QC', 3.1, 'GreenPalm3@gmail.com', '235-345-2321', 5, 'Cindy Petty'),
+                        ('00036', 'Green Palm Inc', '63 Winifred Road, Montreal QC', 3.1, 'GreenPalm4@gmail.com', '283-123-2222', 5, 'Alexa Burch'),
+                        ('00037', 'Green Palm Inc', '64 Winifred Road, Montreal QC', 3.2, 'GreenPalm5@gmail.com', '234-324-8166', 5, 'John Dennis'),
+                        ('00038', 'Green Palm Inc', '65 Winifred Road, Montreal QC', 3.7, 'GreenPalm6@gmail.com', '647-349-3299', 5, 'Blake Landry'),
+                        ('00039', 'Green Palm Inc', '66 Winifred Road, Montreal QC', 3.9, 'GreenPalm7@gmail.com', '182-437-2732', 5, 'Clarissa Blair'),
+                        ('00040', 'Green Palm Inc', '67 Winifred Road, Montreal QC', 3.2, 'GreenPalm8@gmail.com', '123-324-2348', 5, 'Deshwan Wheeler');
                         
 INSERT INTO phone_numbers VALUES ('Comfy Resort Corporation', '412-325-324'), 
 								('Comfy Resort Corporation', '416-234-6876'),
@@ -183,6 +183,99 @@ INSERT INTO contact_email_addresses VALUES ('Comfy Resort Corporation', 'ComfyRe
                                 ('Ocean River Corporation', 'OceanRiver2@gmail.com'),
                                 ('Green Palm Inc', 'GreenPalm1@gmail.com'),
                                 ('Green Palm Inc', 'GreenPalm2@gmail.com');
+                                
+                                
+-- Insert Employee Data
+INSERT INTO employee VALUES (547-99-7550, '12 Rose Garden, Ottawa ON', 'Richard Moon', 'Manager', '00001'), 
+							(039-72-8581, '12 Bank Street, Ottawa ON', 'Kin Ge', 'Housekeeping & Service', '00001'), 
+                            (004-13-9177, '33 Village Area, Ottawa ON', 'James Rob', 'Manager', '00002'), 
+                            (444-27-9532, '23 England Bridge st, Ottawa ON', 'Aryan Khan', 'Housekeeping & Service', '00002'), 
+                            (451-01-3591, '74 Hugh River Rd, Ottawa ON', 'Stephanie Adn', 'Manager', '00003'), 
+                            (352-23-2349, '74 Hugh River Rd, Ottawa ON', 'Arjun Shah', 'Housekeeping & Service', '00003'), 
+                            (321-69-1249, 'Village Area, Ottawa ON', 'John Won', 'Manager', '00004'), 
+                            (731-29-4317, '33 Village Area, Ottawa ON', 'Raghav Binu', 'Housekeeping & Service', '00004'), 
+                            (102-39-6141, '74 Hugh River Rd, Ottawa ON', 'Victor Ed', 'Manager', '00005'), 
+                            (382-49-5572, '33 Village Area, Ottawa ON', 'Ananya Singh', 'Housekeeping & Service', '00005'), 
+                            (401-79-1043, '76 Hugh River Rd, Ottawa ON', 'Arjun Rin', 'Manager', '00006'), 
+                            (529-12-2911, '45 Village Area, Ottawa ON', 'Aman Kun', 'Housekeeping & Service', '00006'), 
+                            (631-24-4274, '11 Bank Street, Ottawa ON', 'Chota Yen', 'Manager', '00007'), 
+                            (777-91-5701, '21 Bank Street, Ottawa ON', 'Shanaya Pathak', 'Housekeeping & Service', '00007'), 
+                            (988-03-5671, '99 Breezy Garden, Ottawa ON', 'William Lin', 'Manager', '00008'), 
+                            (999-25-3501, '32 Local Garden, Ottawa ON', 'Ron Smith', 'Housekeeping & Service', '00008');
+                            
+                            
+INSERT INTO employee VALUES (457-11-3471, '13 Rose Garden, Ottawa ON', 'John Liu', 'Manager', '00009'), 
+							(329-52-3429, '21 Bank Street, Ottawa ON', 'Jay Park', 'Housekeeping & Service', '00009'), 
+                            (567-23-4353, 'Village Area, Ottawa ON', 'Alice Parker', 'Manager', '00010'), 
+                            (352-75-5551, 'England Bridge st, Ottawa ON', 'Victoria Smith', 'Housekeeping & Service', '00010'), 
+                            (357-45-5559, 'Hugh River Rd, Ottawa ON', 'James Smith', 'Manager', '00011'), 
+                            (193-74-2149, '11 Bank Street, Ottawa ON', 'Nadine Rin', 'Housekeeping & Service', '00011'), 
+                            (429-23-3591, 'Village Area, Ottawa ON', 'Jimmy Dao', 'Manager', '00012'), 
+                            (327-55-3698, '2 Sunrise Apt, Ottawa ON', 'Bill Gates', 'Housekeeping & Service', '00012'), 
+                            (568-66-6713, 'Breezy Wood Blv, Ottawa ON', 'Ron Fredrick', 'Manager', '00013'), 
+                            (102-77-3103, 'Firestone Valley, Ottawa ON', 'Stan Lee', 'Housekeeping & Service', '00013'), 
+                            (222-23-8841, '12 Bank Street, Ottawa ON', 'Victoria Son', 'Manager', '00014'), 
+                            (359-25-5286, 'Village Area, Ottawa ON', 'Jennifer Lee', 'Housekeeping & Service', '00014'), 
+                            (357-31-4306, '9 Bank Street, Ottawa ON', 'Wilson Seu', 'Manager', '00015'), 
+                            (981-75-4729, '12 Bank Street, Ottawa ON', 'Bruce Lin Mei', 'Housekeeping & Service', '00015'), 
+                            (781-65-4638, '10 Breezy Garden, Ottawa ON', 'Xin Drew', 'Manager', '00016'), 
+                            (800-76-5265, '13 Local Garden, Ottawa ON', 'John John', 'Housekeeping & Service', '00016');
+                            
+                            
+                            
+INSERT INTO employee VALUES (442-52-4323, '42 Rose Garden, Toronto ON', 'Alison Ray', 'Manager', '00017'), 
+							(974-88-6532, '34 Bank Street, Toronto ON', 'Brent Tim', 'Housekeeping & Service', '00017'), 
+                            (001-34-6488, '65 Village Area, Toronto ON', 'Brendon Liu', 'Manager', '00018'), 
+                            (572-54-5421, '57 England Block st, Toronto ON', 'Rodrick Burton', 'Housekeeping & Service', '00018'), 
+                            (456-32-2344, '1 Hugh River Rd, Toronto ON', 'Susan Ann', 'Manager', '00019'), 
+                            (458-55-7654, '23 Bank Street, Toronto ON', 'Darnell Serrano', 'Housekeeping & Service', '00019'), 
+                            (528-82-5432, 'Village Area, Toronto ON', 'Oman Son', 'Manager', '00020'), 
+                            (948-76-3621, '27 Sunrise Apt, Toronto ON', 'Frankie Mendoza', 'Housekeeping & Service', '00020'), 
+                            (342-65-9932, '1 Breezy Wood Blv, Toronto ON', 'Kristina Sven', 'Manager', '00021'), 
+                            (352-22-9999, '1 Firestone Valley, Toronto ON', 'Angelia Benton', 'Housekeeping & Service', '00021'), 
+                            (356-45-9163, '65 Bank Street, Toronto ON', 'Sophia James', 'Manager', '00022'), 
+                            (291-54-2347, 'Village Town, Toronto ON', 'Lorraine Morton', 'Housekeeping & Service', '00022'), 
+                            (423-23-7421, '94 Bank Street, Toronto ON', 'Winston Fred', 'Manager', '00023'), 
+                            (395-65-7772, '42 Bank Street, Toronto ON', 'Antoine Rhodes', 'Housekeeping & Service', '00023'), 
+                            (952-67-4521, '45 Breezy Garden, Toronto ON', 'Miraya Park', 'Manager', '00024'), 
+                            (214-72-6431, '65 Local Garden, Toronto ON', 'Ashley Sosa', 'Housekeeping & Service', '00024');
+					
+                            
+INSERT INTO employee VALUES (534-11-6020, '43 Rose Garden, Vancouver BC', 'Ray Jin', 'Manager', '00025'), 
+							(645-12-6609, '54 Bank Street, Vancouver BC', 'Wilber Chandler', 'Housekeeping & Service', '00025'), 
+                            (435-13-8293, '23 Village Area, Vancouver BC', 'Jay Singh', 'Manager', '00026'), 
+                            (765-14-3530, '75 England Bridge st, Vancouver BC', 'Jerome Mcdowell', 'Housekeeping & Service', '00026'), 
+                            (666-15-2846, '23 Hugh River Rd, Vancouver BC', 'Tanya Lan', 'Manager', '00027'), 
+                            (345-16-2871, '53 Bank Street, Vancouver BC', 'Mauricio Henry', 'Housekeeping & Service', '00027'), 
+                            (464-63-0643, '32 Village Area, Vancouver BC', 'John Lin Shin', 'Manager', '00028'), 
+                            (401-54-2705, '32 Sunrise Apt, Vancouver BC', 'Reva Forbes', 'Housekeeping & Service', '00028'), 
+                            (481-56-6159, '43 Breezy Wood Blv, Vancouver BC', 'Ali Paul', 'Manager', '00029'), 
+                            (452-01-8224, '11 Firestone Valley, Vancouver BC', 'Blanca Chavez', 'Housekeeping & Service', '00029'), 
+                            (001-55-9171, '95 Bank Street, Vancouver BC', 'Donald Duck', 'Manager', '00030'), 
+                            (384-19-6990, '86 Village Area, Vancouver BC', 'Brock Jordan', 'Housekeeping & Service', '00030'), 
+                            (305-38-3124, '55 Bank Street, Vancouver BC', 'Katherine Wills', 'Manager', '00031'), 
+                            (604-71-5809, '66 Bank Street, Vancouver BC', 'Odell Gonzales', 'Housekeeping & Service', '00031'), 
+                            (311-51-6185, '22 Breezy Garden, Vancouver BC', 'Porter Gibbs', 'Manager', '00032'), 
+                            (801-42-0011, '1 Local Garden, Vancouver BC', 'Emile Hendricks', 'Housekeeping & Service', '00032');
+                            
+                            
+INSERT INTO employee VALUES (345-12-4357, '53 Rose Garden, Montreal QC', 'Lucas Klein', 'Manager', '00033'), 
+							(361-23-2048, '64 Bank Street, Montreal QC', 'Mason Liu', 'Housekeeping & Service', '00033'), 
+                            (453-53-5732, '34 Village Area, Montreal QC', 'Antony Nelson', 'Manager', '00034'), 
+                            (462-32-4572, '23 England Bridge st, Montreal QC', 'Cecelia Shelton', 'Housekeeping & Service', '00034'), 
+                            (342-43-0173, '64 Hugh River Rd, Montreal QC', 'Cindy Petty', 'Manager', '00035'), 
+                            (972-53-4720, '64 Bank Street, Montreal QC', 'Lori Valentine', 'Housekeeping & Service', '00035'), 
+                            (852-32-0473, '23 Village Area, Montreal QC', 'Alexa Burch', 'Manager', '00036'), 
+                            (576-42-1731, '54 Sunrise Apt, Montreal QC', 'Jan Beltran', 'Housekeeping & Service', '00036'), 
+                            (438-64-3621, '23 Breezy Wood Blv, Montreal QC', 'John Dennis', 'Manager', '00037'), 
+                            (264-75-5343, 'Firestone River, Montreal QC', 'Herb Hartman', 'Housekeeping & Service', '00037'), 
+                            (453-89-6437, '69 Bank Street, Montreal QC', 'Blake Landry', 'Manager', '00038'), 
+                            (138-75-5183, 'Village Area, Montreal QC', 'Dalton Ben', 'Housekeeping & Service', '00038'), 
+                            (573-63-4372, '94 Bank Street, Montreal QC', 'Clarissa Blair', 'Manager', '00039'), 
+                            (475-87-6803, '19 Bank Street, Montreal QC', 'Noble Patterson', 'Housekeeping & Service', '00039'), 
+                            (239-52-5439, '21 Breezy Garden, Montreal QC', 'Deshwan Wheeler', 'Manager', '00040'), 
+                            (573-41-4320, '53 Local Garden, Montreal QC', 'Barney Sanders', 'Housekeeping & Service', '00040');
+							
                                 
                                 
 -- First Hotel Chain                                
@@ -403,5 +496,5 @@ INSERT INTO room VALUES (4001, 69.99, '2-Bed, Bathroom, TV, Alarm, Desk w/ Chair
                         (4704, 150.99, '3-Bed, Bathroom, Toiletries, TV, Lamp, AC/Heating, Fridge, WIFI, Fitness', 3, false, true, null, '00040'),
                         (4705, 300.99, '4-Bed, Toiletries, TV, Alarm, Desk w/ Chair, Lamp, AC/Heating, Fridge, WIFI, Fitness, Pool', 4, true, true, null, '00040');
 
-                        
 
+-- Data for Customer, Booking, Renting will be added dynamically using the website
