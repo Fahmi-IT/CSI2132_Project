@@ -27,6 +27,10 @@ const Home = () => {
           <img src={loc5} alt="idk" class="locImage"></img>
           <img src={loc6} alt="idk" class="locImage"></img>
         </div>
+        <div class="signUpRedirect">
+          <h3 class="Ready">Ready for Adventure?</h3>
+          <div class="button"><btn class="signUp">Book Now!</btn></div>
+        </div>
       </div>
     </>
   );

@@ -16,7 +16,7 @@
     align-items: center;
     top: 0;
     text-align: center;
-    margin-left: 45%;
+    margin-left: 44%;
     margin-top: 500px;
     color: white;
     font-family: "Poppins", sans-serif;
@@ -25,7 +25,7 @@
 
   .main-body {
     position: absolute;
-    margin-top: 1030px;
+    margin-top: 1033px;
     margin-left: 11.8%;
   }
 
@@ -46,4 +46,31 @@
 
   .row2 {
     margin-top: 25px;
+  }
+
+  .signUpRedirect {
+    margin-top: 35px;
+  }
+
+  .Ready {
+    font-family: "Poppins", sans-serif;
+    font-size: 42px;
+  }
+
+  .signUp {
+    padding: 10px 15px 10px 15px;
+    border: 2px solid black;
+    background-color: white;
+    font-family: "Poppins", sans-serif;
+    border-radius: 12px;
+    font-size: 36px;
+  }
+
+  .signUp:hover {
+    background-color: green;
+  }
+
+  .button {
+    margin-top: 27px;
+    padding-bottom: 35px;
   }
