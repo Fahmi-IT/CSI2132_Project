@@ -7,7 +7,7 @@ import loc3 from "./images/loc3.jpg"
 import loc4 from "./images/loc4.jpg"
 import loc5 from "./images/loc5.jpg"
 import loc6 from "./images/loc6.jpg"
-  
+
 const Home = () => {
   return (
     <>
@@ -29,7 +29,7 @@ const Home = () => {
         </div>
         <div class="signUpRedirect">
           <h3 class="Ready">Ready for Adventure?</h3>
-          <div class="button"><btn class="signUp">Book Now!</btn></div>
+          <div class="button"><btn onClick={event =>  window.location.href='/search'} class="signUp">Book Now!</btn></div>
         </div>
       </div>
     </>
