@@ -2,6 +2,7 @@ import React from "react";
 import "./about.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faComputer,
   faGlobe,
   faRocket,
   faScroll,
@@ -37,6 +38,9 @@ function About() {
         <div className="row">
           <History />
         </div>
+        <div className="row">
+          <Group1 />
+        </div>
       </div>
     </>
   );
@@ -49,7 +53,7 @@ function Team() {
         <div className="icon">
           <FontAwesomeIcon icon={faUser} />
         </div>
-        <h3>Our Team</h3>
+        <h3>Our Hotel Team</h3>
         <p>
           Our team consists of experienced professionals who are passionate
           about the travel industry. We have a deep understanding of the needs
@@ -107,7 +111,7 @@ function History() {
       <div className="icon">
         <FontAwesomeIcon icon={faScroll} />
       </div>
-      <h3>Our History</h3>
+      <h3>Aruma's History</h3>
       <p>
         Aruma is a hotel booking system that was founded in 2005 with the aim of
         simplifying the process of making hotel reservations for customers. The
@@ -120,7 +124,7 @@ function History() {
         of hotels, and competitive prices.
       </p>
       <br></br>
-      <p>
+      {/* <p>
         One of the key factors in Aruma's success has been its commitment to
         using the latest technology. From the beginning, the company has
         invested in state-of-the-art systems and software to ensure that its
@@ -128,8 +132,8 @@ function History() {
         stay ahead of the curve in a fast-paced industry, and to offer customers
         a booking experience that is both efficient and user-friendly.
       </p>
-      <br></br>
-      <p>
+      <br></br> */}
+      {/* <p>
         Another important factor in Aruma's success has been its focus on
         customer service. The company has always placed a high priority on
         ensuring that its customers have access to the support and assistance
@@ -138,7 +142,7 @@ function History() {
         satisfaction has helped to build a loyal following for Aruma, and has
         contributed to the company's long-term success.
       </p>
-      <br></br>
+      <br></br> */}
       <p>
         Today, Aruma continues to be a leader in the hotel booking industry,
         with a wide range of hotels and accommodation options available to
@@ -146,6 +150,38 @@ function History() {
         technology, and customer service ensures that it will remain a trusted
         and reliable partner for travelers for many years to come.
       </p>
+    </div>
+  );
+}
+
+function Group1() {
+  return (
+    <div className="card card3 extra">
+      <div className="icon">
+        <FontAwesomeIcon icon={faComputer} />
+      </div>
+      <h3>Aruma's Developpers: Group #1 of CSI 2132</h3>
+      <p>
+        We are a group of enthusiastic developers-students who are passionate
+        about building innovative solutions that simplify and enhance people's
+        lives. Our team consists of individuals with diverse backgrounds, skill
+        sets, and experiences, united by our common goal of creating a
+        world-class hotel management database site for our course in databases,
+        CSI 2132.
+      </p>
+      <br></br>
+      <p>
+        We believe in the power of collaboration and teamwork, and we bring our
+        best ideas, expertise, and creativity to the table to develop software
+        that exceeds our customers' expectations. We are constantly learning,
+        growing, and adapting to new technologies and trends, and we take pride
+        in delivering solutions that are efficient, user-friendly, and reliable.
+        Above all, we are committed to providing exceptional customer service
+        and support, and we look forward to helping our partners achieve their
+        hotel business objectives and helping our cusomters enjoy their holiday
+        travels.
+      </p>
+      <br></br>
     </div>
   );
 }
