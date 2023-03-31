@@ -15,20 +15,23 @@ const Home = () => {
         <img src={banffImg} alt="Banff, Canada"></img>
       </div>
       <h3 class="welcome">Welcome.</h3>
+
       <div class="main-body">
-        <h3 class="locText">Ready for Adventure ?</h3>
+        <h3 class="secondary-title">Ready for Adventure ?</h3>
+
         <div class="row1">
           <img src={loc1} alt="idk" class="locImage"></img>
           <img src={loc2} alt="idk" class="locImage"></img>
           <img src={loc3} alt="idk" class="locImage"></img>
         </div>
+
         <div class="row2">
           <img src={loc4} alt="idk" class="locImage"></img>
           <img src={loc5} alt="idk" class="locImage"></img>
           <img src={loc6} alt="idk" class="locImage"></img>
         </div>
+
         <div class="signUpRedirect">
-          {/* <h3 class="Ready">Ready for Adventure?</h3> */}
           <div class="buttonDiv">
             <btn
               onClick={(event) => (window.location.href = "/search")}
