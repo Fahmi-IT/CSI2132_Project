@@ -1,5 +1,5 @@
 import React from 'react';
-import searchBar from './search_bar/searchbar';
+import SearchBar from './search_bar/searchbar';
   
 const Search = () => {
   return (
@@ -11,7 +11,7 @@ const Search = () => {
         height: '100vh'
       }}
     >
-      <h1>Searching for someone new.</h1>
+      <SearchBar />
     </div>
   );
 };
