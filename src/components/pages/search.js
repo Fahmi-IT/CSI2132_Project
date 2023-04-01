@@ -1,4 +1,5 @@
 import React from 'react';
+import searchBar from './search_bar/searchbar';
   
 const Search = () => {
   return (

@@ -30,7 +30,7 @@ const NavBar = () => {
             Search
           </NavLink>
           <NavLink to='/signup' activeStyle>
-            Sign Up
+            Sign In
           </NavLink>
         </NavMenu>
       </Nav>
