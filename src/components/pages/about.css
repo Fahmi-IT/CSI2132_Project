@@ -19,7 +19,7 @@ h4 {
 }
 
 .about-us {
-  padding-top: 4rem;
+  /* padding-top: 4rem; */
   padding-left: 12rem;
   padding-right: 12rem;
 }
@@ -53,6 +53,10 @@ h4 {
 .card3 {
   margin-top: 4rem;
   margin-bottom: 4rem;
+}
+
+.extra {
+  margin-top: 0rem;
 }
 
 .card .icon {
