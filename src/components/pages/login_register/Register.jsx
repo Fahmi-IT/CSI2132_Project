@@ -2,12 +2,15 @@ import React, { useState } from "react";
 
 export const Register = (props) => {
   const [SSN, setSSN] = useState("");
-  const [pass, setPass] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     console.log(SSN);
+=======
+    console.log("success");
+>>>>>>> 116e4c1b901b34241b84b1aeb5fc57573b9a9d4d
   };
   return (
     <div className="auth-form-container">
@@ -38,15 +41,6 @@ export const Register = (props) => {
           placeholder="Address"
           id="Address"
           name="Address"
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          type="password"
-          placeholder="********"
-          id="password"
-          name="password"
         />
         <button type="submit">Register</button>
       </form>
