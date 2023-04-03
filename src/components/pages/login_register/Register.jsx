@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export const Register = (props) => {
   const [email, setEmail] = useState("");
+  const [SSN, setSSN] = useState("");
   const [pass, setPass] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -23,8 +24,8 @@ export const Register = (props) => {
         />
         <label htmlFor="SSN">SSN/SIN</label>
         <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={SSN}
+          onChange={(e) => setSSN(e.target.value)}
           type="text"
           placeholder="SSN/SIN"
           id="SSN"
