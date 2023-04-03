@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
 export const Register = (props) => {
-  const [email, setEmail] = useState("");
   const [SSN, setSSN] = useState("");
   const [pass, setPass] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
+    console.log(SSN);
   };
   return (
     <div className="auth-form-container">
