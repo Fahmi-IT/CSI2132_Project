@@ -5,10 +5,10 @@ export const Login = (props) => {
   // const [email, setEmail] = useState("");
   // const [SSN, setSSN] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(email);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // console.log(email);
+  // };
 
   const [customer, setCustomer] = useState({
     SSN: "",
