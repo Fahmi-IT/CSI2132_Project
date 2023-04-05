@@ -216,12 +216,13 @@ function SearchBar() {
       const obj = JSON.parse(data);
       Bbookings = [];
       for (let i = 0; i < obj.length; i++) {
+        let temp = obj[i]
         let booking = {
-          bookingID: booking["booking_id"],
-          roomNumber: booking["room_number"],
-          startDate: booking["start_date"],
-          endDate: booking["end_date"],
-          customerID: booking["customer_id"]
+          bookingID: temp["booking_id"],
+          roomNumber: temp["room_number"],
+          startDate: temp["start_date"],
+          endDate: temp["end_date"],
+          customerID: temp["customer_id"]
         }
         Bbookings.push(booking);
       }
