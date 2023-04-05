@@ -7,7 +7,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "DanaRoot5!",
-  database: "OurProjectSchema",
+  database: "MyLittleSchema",
 });
 
 const bodyParser = require("body-parser");
@@ -29,13 +29,13 @@ app.get("/getCustomers", (req, res) => {
 
 app.post("/customers", (req, res) => {
   let customer = req.body;
-  customer.customer_ID = Math.floor(Math.random() * 10000);
+  // customer.customer_ID = Math.floor(Math.random() * 10000);
   customer.date_of_registration = new Date();
   console.log(customer);
   const sql =
-    "INSERT INTO customer (customer_ID,SSN, address, full_name, date_of_registration) VALUES (?, ?, ?, ?, ?);";
+    "INSERT INTO customer (SSN, address, full_name, date_of_registration) VALUES (?, ?, ?, ?);";
   const values = [
-    customer.customer_ID,
+    // customer.customer_ID,
     customer.SSN,
     customer.address,
     customer.full_name,
