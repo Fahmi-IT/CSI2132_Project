@@ -50,7 +50,7 @@ FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID) ON DELETE CASCADE
 
 -- Schema for Customer
 CREATE TABLE customer (
-customer_ID CHAR(9) NOT NULL, -- Add passowrd for both customer and employee ASK FOR EMAIL AND GIVE THEM AN ID AND DON'T KEEP THE EMAIL
+customer_ID CHAR(9) NOT NULL AUTO_INCREMENT, -- Add passowrd for both customer and employee ASK FOR EMAIL AND GIVE THEM AN ID AND DON'T KEEP THE EMAIL
 SSN CHAR(9) NOT NULL, -- Just to store when a customer signs up -> generate a customer_ID later 
 address VARCHAR(30) NOT NULL,
 full_name VARCHAR(40) NOT NULL, 
