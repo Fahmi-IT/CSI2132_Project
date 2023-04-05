@@ -1,4 +1,8 @@
 const {Client} = require('pg')
+const express = require('express');
+
+const app = express()
+const port = 3000
 
 const client = new Client({
     host: "localhost",
@@ -9,12 +13,3 @@ const client = new Client({
 })
 
 client.connect();
-
-client.query('SELECT * FROM hotel_chain', (err, res) => {
-    if (!err) {
-        console.log(res.rows);
-    } else {
-        console.log(err.message);
-    }
-    client.end;
-})
