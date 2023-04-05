@@ -6,11 +6,7 @@ export const Register = (props) => {
   const [address, setAddress] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
     console.log(SSN);
-=======
-    console.log("success");
->>>>>>> 116e4c1b901b34241b84b1aeb5fc57573b9a9d4d
   };
   return (
     <div className="auth-form-container">

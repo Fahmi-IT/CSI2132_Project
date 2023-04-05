@@ -3,29 +3,37 @@ import "./searchbar.css";
 
 function SearchBar() {
   var roomers = [];
-  const [price, setPrice] = useState(roomers);
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState(roomers);
+  const [capacity, setCapacity] = useState('');
+  const [price, setPrice] = useState('');
+  const handleCapacityChange = (e) => {
+    setCapacity(e.target.value);
+    console.log(capacity);
+  };
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value);
+    console.log(price);
+  }
   useEffect(() => {
     getRooms();
   }, []);
-  const priceChangeHandler = e => {
-    const value = e.target.value;
-    if (value === 50.00) {
-      setPrice(
-        roomers.filter(roomer => {
-          if (roomer.PPN % 2 === 0) {
-            return true;
-          } else {
-            return false;
-          }
-        })
-      )
+  function passFilter(room) {
+    var resulting = true;
+    if (capacity != null) {
+      if (parseInt(room.capacity) < parseInt(capacity)) {
+        resulting = false;
+      }
     }
+    if (price != null) {
+      if (parseInt(room.PPN) > parseInt(price)) {
+        resulting = false;
+      }
+    }
+    return resulting;
   }
   function getRooms() {
     fetch('http://localhost:3001/').then(response => {return response.text();})
       .then(data => {
-        console.log(data)
         const obj = JSON.parse(data);
         roomers = [];
         for (let i = 0; i < obj.length; i++) {
@@ -40,9 +48,10 @@ function SearchBar() {
             capacity: temp["capacity"],
             extendable: " " + temp["extendable"]
           }
-          roomers.push(roome);
+          if (passFilter(roome)) {
+            roomers.push(roome);
+          }
         }
-        console.log(roomers);
         setRooms(roomers);
       });
   }
@@ -59,7 +68,7 @@ function SearchBar() {
   }
   return (
     <>
-      <div with="100%">
+      <div width="100%">
       <form class="searchFields">
         <h3>Search</h3>
         <label for="startDate">Start Date</label>
@@ -67,7 +76,7 @@ function SearchBar() {
         <label for="endDate">End Date</label>
         <input type="text"/>
         <label for="capacity">Capacity</label>
-        <input type="text"/>
+        <input onChange={handleCapacityChange} type="number"/>
         <label for="area">Area</label>
         <input type="text"/>
         <label for="hotelChain">Hotel Chain</label>
@@ -76,10 +85,11 @@ function SearchBar() {
         <input type="text"/>
         <label for="numberOfRooms">Number Of Rooms</label>
         <input type="text"/>
-        <label value="50.00" onChange={priceChangeHandler} for="PPN">Price of Rooms</label>
-        <input type="text"/>
-        <button onClick={getRooms()}>Reset</button>
+        <label for="PPN">Price of Rooms</label>
+        <input onChange={handlePriceChange} type="text"/>
       </form>
+      <button>Nothing</button>
+      <button onClick={getRooms()}>Fetch</button>
       </div>
       <div class="containerList"><ul z-index="5">{rooms.map((roomba) => <Room roomIT={roomba}/>)}</ul></div>
     </>
