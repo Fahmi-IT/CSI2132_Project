@@ -10,6 +10,7 @@ export const Register = (props) => {
     SSN: "",
     full_name: "",
   });
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setCustomer((prev) => ({
@@ -23,13 +24,16 @@ export const Register = (props) => {
     try {
       await axios.post("http://localhost:8080/customers", customer);
       console.log("Customer added");
+      setMessage("Account successfully created!");
     } catch (err) {
+      setMessage("Oh! An error occured. Please try again.");
       console.log(err);
     }
   };
   return (
     <div className="auth-form-container">
       <h2>Register</h2>
+      {message && <p>{message}</p>}
       <form
         className="register-form"
         // method="POST"

@@ -2,17 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export const Login = (props) => {
-  // const [email, setEmail] = useState("");
-  // const [SSN, setSSN] = useState("");
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // console.log(email);
-  // };
-
   const [customer, setCustomer] = useState({
     SSN: "",
   });
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setCustomer((prev) => ({
@@ -24,9 +17,19 @@ export const Login = (props) => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8080/signIn", customer);
+      const response = await axios.post(
+        "http://localhost:8080/signIn",
+        customer
+      );
+      const count = response.data[0]["COUNT(full_name)"];
+      if (count === 0) {
+        setMessage("Account doesn't exist!");
+      } else {
+        setMessage("Account exists! You're signed in");
+      }
       console.log("Customer's SSN checked in Database");
     } catch (err) {
+      setMessage("Oh! An error occured. Please try again.");
       console.log(err);
     }
   };
@@ -34,6 +37,7 @@ export const Login = (props) => {
   return (
     <div className="auth-form-container">
       <h2>Login</h2>
+      {message && <p>{message}</p>}
       <form
         className="login-form"
         // method="POST"
