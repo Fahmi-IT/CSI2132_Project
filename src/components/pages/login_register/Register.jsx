@@ -1,29 +1,52 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 export const Register = (props) => {
-  const [SSN, setSSN] = useState("");
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const handleSubmit = (e) => {
+  // const [SSN, setSSN] = useState("");
+  // const [name, setName] = useState("");
+  // const [address, setAddress] = useState("");
+  const [customer, setCustomer] = useState({
+    address: "",
+    SSN: "",
+    full_name: "",
+  });
+
+  const handleChange = (e) => {
+    setCustomer((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleClick = async (e) => {
     e.preventDefault();
-    console.log(SSN);
+
+    try {
+      await axios.post("http://localhost:8080/customers", customer);
+      console.log("Customer added");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="auth-form-container">
       <h2>Register</h2>
-      <form className="register-form" onSubmit={handleSubmit}>
+      <form
+        className="register-form"
+        // method="POST"
+        // action="http://localhost:3001/insert"
+      >
         <label htmlFor="name">Full Name</label>
         <input
-          value={name}
-          name="name"
-          onChange={(e) => setName(e.target.value)}
+          // value={name}
+          name="full_name"
+          onChange={handleChange}
           id="name"
           placeholder="Full Name"
         />
         <label htmlFor="SSN">SSN/SIN</label>
         <input
-          value={SSN}
-          onChange={(e) => setSSN(e.target.value)}
+          // value={SSN}
+          onChange={handleChange}
           type="text"
           placeholder="SSN/SIN"
           id="SSN"
@@ -31,14 +54,16 @@ export const Register = (props) => {
         />
         <label htmlFor="Address">Address</label>
         <input
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          // value={address}
+          onChange={handleChange}
           type="text"
-          placeholder="Address"
-          id="Address"
-          name="Address"
+          placeholder="address"
+          id="address"
+          name="address"
         />
-        <button type="submit">Register</button>
+        <button type="submit" onClick={handleClick}>
+          Register
+        </button>
       </form>
       <button className="link-btn" onClick={() => props.onFormSwitch("login")}>
         Already have an account? Login here.
