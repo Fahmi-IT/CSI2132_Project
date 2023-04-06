@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../../../App.js";
 
 export const Login = (props) => {
+  const { user, signInEmp, signInCus, signOut, loggedIn, cus_emp } =
+    useContext(UserContext);
+
   const [customer, setCustomer] = useState({
     SSN: "",
   });
@@ -22,12 +27,28 @@ export const Login = (props) => {
         customer
       );
       const count = response.data[0]["COUNT(full_name)"];
-      if (count === 0) {
+
+      const secondResponse = await axios.post(
+        "http://localhost:8080/signInEmp",
+        customer
+      );
+      const secondCount = secondResponse.data[0]["COUNT(full_name)"];
+
+      if (count === 0 && secondCount === 0) {
         setMessage("Account doesn't exist!");
+      } else if (count === 0 && secondCount !== 0) {
+        setMessage("Account exists! Employee signed in.");
+        signInEmp({
+          user: customer.SSN,
+        });
       } else {
-        setMessage("Account exists! You're signed in");
+        setMessage("Account exists! Customer signed in.");
+        signInCus({ user: customer.SSN });
+        // console.log("Customer's SSN is " + customer.SSN);
+        // console.log(user);
       }
-      console.log("Customer's SSN checked in Database");
+
+      console.log("User's SSN checked in Database");
     } catch (err) {
       setMessage("Oh! An error occured. Please try again.");
       console.log(err);
@@ -38,14 +59,9 @@ export const Login = (props) => {
     <div className="auth-form-container">
       <h2>Login</h2>
       {message && <p>{message}</p>}
-      <form
-        className="login-form"
-        // method="POST"
-        // action="http://localhost:3001/check"
-      >
+      <form className="login-form">
         <label htmlFor="SSN">SSN/SIN</label>
         <input
-          // value={SSN}
           onChange={handleChange}
           type="text"
           placeholder="SSN/SIN"
