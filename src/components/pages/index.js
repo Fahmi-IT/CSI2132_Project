@@ -7,8 +7,12 @@ import loc3 from "./images/loc3.jpg";
 import loc4 from "./images/loc4.jpg";
 import loc5 from "./images/loc5.jpg";
 import loc6 from "./images/loc6.jpg";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../App.js";
 
 const Home = () => {
+  const { user, signInEmp, signInCus, signOut, loggedIn, cus_emp } =
+    useContext(UserContext);
   return (
     <>
       <div class="homeImage">
