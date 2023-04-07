@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Popup from 'reactjs-popup';
 import "./searchbar.css";
 
 function SearchBar() {
@@ -236,7 +237,10 @@ function SearchBar() {
         <p>Price Per Night: {roomIT.PPN}</p>
         <p>Capacity: {roomIT.capacity}</p>
         <p>Extendable: {roomIT.extendable}</p>
-        <button>Book</button>
+        <p>Room #: {roomIT.roomNumber}</p>
+        <Popup trigger={<button>Book</button>} position="right center">
+          <div>Test</div>
+        </Popup>
       </div>
     )
   }
