@@ -9,20 +9,6 @@ import halifaximg from "./locationImg/loc6.jpg";
 import edmontonimg from "./locationImg/loc7.jpg";
 import saskatoonimg from "./locationImg/loc8.jpg";
 import niagaraFallsimg from "./locationImg/loc9.jpg";
-// const Hotels = () => {
-//   return (
-//     <div
-//       style={{
-//         display: 'flex',
-//         justifyContent: 'Right',
-//         alignItems: 'Right',
-//         height: '100vh'
-//       }}
-//     >
-//       <h1>Hotel? Trivago.</h1>
-//     </div>
-//   );
-// };
 
 function Hotels() {
   return (

@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export const Register = (props) => {
-  // const [SSN, setSSN] = useState("");
-  // const [name, setName] = useState("");
-  // const [address, setAddress] = useState("");
   const [customer, setCustomer] = useState({
     address: "",
     SSN: "",

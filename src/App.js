@@ -6,8 +6,10 @@ import Home from "./components/pages/index";
 import About from "./components/pages/about";
 import Booking from "./components/pages/booking";
 import Hotels from "./components/pages/hotels";
+import ViewProfile from "./components/pages/settings";
 import Search from "./components/pages/search";
 import SignUp from "./components/pages/signup";
+
 import { useState, createContext, useEffect } from "react";
 
 export const UserContext = createContext({
@@ -20,7 +22,7 @@ export const UserContext = createContext({
 });
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
   const [cus_emp, setCus_emp] = useState(false);
 
@@ -33,9 +35,9 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+  // useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(user));
+  // }, [user]);
 
   const signOut = () => {
     setUser(null);
@@ -45,24 +47,27 @@ function App() {
 
   const signInCus = (user) => {
     setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
+    console.log("SSN saved as " + user);
     setLoggedIn(true);
-    console.log("User logged in:" + user);
+    console.log("User logged in:" + user.data);
     setCus_emp(true);
   };
 
   const signInEmp = (user) => {
     setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
     setLoggedIn(true);
     console.log("User logged in:" + user);
     setCus_emp(false);
   };
   return (
     <>
-      <div className="App">
-        <div class="navbar">
-          <UserContext.Provider
-            value={{ user, signInEmp, signInCus, signOut, loggedIn, cus_emp }}
-          >
+      <UserContext.Provider
+        value={{ user, signInEmp, signInCus, signOut, loggedIn, cus_emp }}
+      >
+        <div className="App">
+          <div class="navbar">
             <Router>
               <NavBar />
               <Route exact path="/">
@@ -80,13 +85,16 @@ function App() {
               <Route exact path="/search">
                 <Search />
               </Route>
+              <Route exact path="/settings">
+                <ViewProfile />
+              </Route>
               <Route exact path="/signup">
                 <SignUp />
               </Route>
             </Router>
-          </UserContext.Provider>
+          </div>
         </div>
-      </div>
+      </UserContext.Provider>
     </>
   );
 }

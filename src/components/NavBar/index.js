@@ -29,6 +29,9 @@ const NavBar = () => {
           <NavLink to="/search" activeStyle>
             Search
           </NavLink>
+          <NavLink to="/settings" activeStyle>
+            Settings
+          </NavLink>
           {loggedIn ? (
             <button onClick={signOut}>Sign Out</button>
           ) : (
