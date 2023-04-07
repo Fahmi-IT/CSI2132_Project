@@ -9,6 +9,20 @@ import halifaximg from "./locationImg/loc6.jpg";
 import edmontonimg from "./locationImg/loc7.jpg";
 import saskatoonimg from "./locationImg/loc8.jpg";
 import niagaraFallsimg from "./locationImg/loc9.jpg";
+// const Hotels = () => {
+//   return (
+//     <div
+//       style={{
+//         display: 'flex',
+//         justifyContent: 'Right',
+//         alignItems: 'Right',
+//         height: '100vh'
+//       }}
+//     >
+//       <h1>Hotel? Trivago.</h1>
+//     </div>
+//   );
+// };
 
 function Hotels() {
   return (
@@ -92,14 +106,14 @@ function Hotels() {
 function LocationCard(props) {
   return (
     <div className="grid-item">
-      <div className="card2">
-        <img className="card-img" src={props.imageSrc} alt={props.imageAlt} />
-        <div className="card-content">
-          <h1 className="card-header">{props.locationName}</h1>
-          <p className="card-text">{props.locationDescription}</p>
-        </div>
+      {/* <div className="card2"> */}
+      <img className="card-img" src={props.imageSrc} alt={props.imageAlt} />
+      <div className="card-content">
+        <h1 className="card-header">{props.locationName}</h1>
+        <p className="card-text">{props.locationDescription}</p>
       </div>
     </div>
+    // </div>
   );
 }
 export default Hotels;
