@@ -66,6 +66,52 @@ app.post("/signIn", (req, res) => {
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CHECKING IF EMPLOYEE EXISTS IE SIGN IN PAGE
+app.post("/signInEmp", (req, res) => {
+  let customer = req.body;
+  console.log(customer);
+  const sql =
+    "SELECT COUNT(full_name) FROM employee WHERE SSN =" + customer.SSN;
+
+  db.query(sql, (err, results) => {
+    console.log("Query results:", results);
+    const count = results[0]["COUNT(full_name)"];
+    console.log("Count:", count);
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GRAB INFO ABOUT A CUSTOMER
+app.post("/getCustomerSettings", (req, res) => {
+  let customer2 = req.body;
+  console.log("The SSN of customer is " + customer2.SSN);
+  const sql =
+    "SELECT SSN, address, full_name, date_of_registration FROM customer WHERE SSN = " +
+    customer2.SSN;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
+// GRAB INFO ABOUT A EMPLOYEE
+app.post("/getEmployeeSettings", (req, res) => {
+  let employee = req.body;
+  console.log("The SSN of employee is " + customer2.SSN);
+  const sql =
+    "SELECT SSN, address, full_name, position, hotel_ID FROM employee WHERE SSN = " +
+    employee.SSN;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
 app.listen(8080, () => {
   console.log(`Server running on port 8080`);
