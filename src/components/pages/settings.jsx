@@ -27,7 +27,7 @@ function ViewProfile() {
     console.log(user);
     try {
       const response = await axios.post(
-        "http://localhost:8080/getCustomerSettings",
+        "http://localhost:3001/getCustomerSettings",
         customer
       );
 
@@ -51,7 +51,7 @@ function ViewProfile() {
     console.log(user);
     try {
       const response2 = await axios.post(
-        "http://localhost:8080/getEmployeeSettings",
+        "http://localhost:3001/getEmployeeSettings",
         employee
       );
       const employeeProp = {

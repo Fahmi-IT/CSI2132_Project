@@ -19,7 +19,7 @@ export const Register = (props) => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8080/customers", customer);
+      await axios.post("http://localhost:3001/customers", customer);
       console.log("Customer added");
       setMessage("Account successfully created!");
     } catch (err) {

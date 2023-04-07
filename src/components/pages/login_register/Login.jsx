@@ -23,13 +23,13 @@ export const Login = (props) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/signIn",
+        "http://localhost:3001/signIn",
         customer
       );
       const count = response.data[0]["COUNT(full_name)"];
 
       const secondResponse = await axios.post(
-        "http://localhost:8080/signInEmp",
+        "http://localhost:3001/signInEmp",
         customer
       );
       const secondCount = secondResponse.data[0]["COUNT(full_name)"];
