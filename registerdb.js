@@ -86,7 +86,7 @@ app.post("/signInEmp", (req, res) => {
 // GRAB INFO ABOUT A CUSTOMER
 app.post("/getCustomerSettings", (req, res) => {
   let customer2 = req.body;
-  console.log("The SSN of customer is " + customer2.SSN);
+  // console.log("The SSN of customer is " + customer2.SSN);
   const sql =
     "SELECT SSN, address, full_name, date_of_registration FROM customer WHERE SSN = " +
     customer2.SSN;
@@ -100,7 +100,6 @@ app.post("/getCustomerSettings", (req, res) => {
 // GRAB INFO ABOUT A EMPLOYEE
 app.post("/getEmployeeSettings", (req, res) => {
   let employee = req.body;
-  console.log("The SSN of employee is " + customer2.SSN);
   const sql =
     "SELECT SSN, address, full_name, position, hotel_ID FROM employee WHERE SSN = " +
     employee.SSN;
