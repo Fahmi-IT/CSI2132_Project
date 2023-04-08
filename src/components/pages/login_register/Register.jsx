@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export const Register = (props) => {
-  // const [SSN, setSSN] = useState("");
-  // const [name, setName] = useState("");
-  // const [address, setAddress] = useState("");
   const [customer, setCustomer] = useState({
     address: "",
     SSN: "",
@@ -22,7 +19,7 @@ export const Register = (props) => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8080/customers", customer);
+      await axios.post("http://localhost:3001/customers", customer);
       console.log("Customer added");
       setMessage("Account successfully created!");
     } catch (err) {

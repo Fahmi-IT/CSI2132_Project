@@ -38,12 +38,13 @@ export const Login = (props) => {
         setMessage("Account doesn't exist!");
       } else if (count === 0 && secondCount !== 0) {
         setMessage("Account exists! Employee signed in.");
-        signInEmp({
-          user: customer.SSN,
-        });
+        signInEmp(customer.SSN);
       } else {
         setMessage("Account exists! Customer signed in.");
-        signInCus({ user: customer.SSN });
+        signInCus(customer.SSN);
+        console.log(user);
+        console.log(cus_emp);
+        console.log(loggedIn);
         // console.log("Customer's SSN is " + customer.SSN);
         // console.log(user);
       }

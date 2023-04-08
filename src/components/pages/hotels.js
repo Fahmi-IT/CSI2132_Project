@@ -106,14 +106,14 @@ function Hotels() {
 function LocationCard(props) {
   return (
     <div className="grid-item">
-      <div className="card2">
-        <img className="card-img" src={props.imageSrc} alt={props.imageAlt} />
-        <div className="card-content">
-          <h1 className="card-header">{props.locationName}</h1>
-          <p className="card-text">{props.locationDescription}</p>
-        </div>
+      {/* <div className="card2"> */}
+      <img className="card-img" src={props.imageSrc} alt={props.imageAlt} />
+      <div className="card-content">
+        <h1 className="card-header">{props.locationName}</h1>
+        <p className="card-text">{props.locationDescription}</p>
       </div>
     </div>
+    // </div>
   );
 }
 export default Hotels;
