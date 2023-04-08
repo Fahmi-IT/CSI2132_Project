@@ -100,7 +100,7 @@ function SearchBar() {
       if (bookings[i].roomNumber === room.roomNumber) {
         let pre = new Date(bookings[i].startDate.substring(0, 4), bookings[i].startDate.substring(5, 7), bookings[i].startDate.substring(8, 10));
         let post = new Date(bookings[i].endDate.substring(0, 4), bookings[i].endDate.substring(5, 7), bookings[i].endDate.substring(8, 10));
-        if (from < post || to > pre) {
+        if ((from < pre && to > post) || (from > pre && to < post) || (from < pre && to < post) || (from > pre && to < post)) {
           return false;
         }
       }
@@ -140,7 +140,7 @@ function SearchBar() {
         return false;
       }
     }
-    if (startY != null && startM != null && startD != null && endY != null && endM != null && endD != null) {
+    if (startY.trim() != "" && startM.trim() != "" && startD.trim() != "" && endY.trim() != "" && endM.trim() != "" && endD.trim() != "") {
       if (!(findBooking(room))) {
         return false;
       }
@@ -239,7 +239,18 @@ function SearchBar() {
         <p>Extendable: {roomIT.extendable}</p>
         <p>Room #: {roomIT.roomNumber}</p>
         <Popup trigger={<button>Book</button>} position="right center">
-          <div>Test</div>
+          <div>
+          <form>
+            <label>Full Name</label>
+            <input type="text" />
+            <label>Credit Card Number</label>
+            <input type="text" />
+            <label>CV</label>
+            <input type="text" />
+            <label>Date of Expiration</label>
+            <input type="text" />
+          </form>
+          </div>
         </Popup>
       </div>
     )
@@ -274,7 +285,6 @@ function SearchBar() {
         <label for="PPN">Price of Rooms</label>
         <input onChange={handlePriceChange} type="text"/>
       </form>
-      <button>Nothing</button>
       <button onClick={getRooms()}>Fetch</button>
       </div>
       <div class="containerList"><ul z-index="5">{rooms.map((roomba) => <Room roomIT={roomba}/>)}</ul></div>
