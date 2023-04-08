@@ -4,18 +4,22 @@ import { UserContext } from "../../App.js";
 import "./settings.css";
 
 function ViewProfile() {
-  const [customerProp, setCustomerProp] = useState(null);
-  const [employeeProp, setEmployeeProp] = useState(null);
   const { loggedIn, cus_emp } = useContext(UserContext);
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(cus_emp);
-
+  const [customerProp, setCustomerProp] = useState(null);
+  const [employeeProp, setEmployeeProp] = useState(null);
   const [customer, setCustomer] = useState({
     SSN: user,
   });
   const [employee, setEmployee] = useState({
     SSN: user,
   });
+
+  const [customerUpdate, setCustomerUpdate] = useState(null);
+  const [employeeUpdate, setEmployeeUpdate] = useState(null);
+
+  // console.log(cus_emp);
+
   useEffect(() => {
     if (!loggedIn) {
       window.location.replace("http://localhost:3000/signup");
@@ -46,6 +50,11 @@ function ViewProfile() {
     }
   };
 
+  const handleEmpClick = async (e) => {
+    setEmployeeUpdate(true);
+    setEmployeeProp(null);
+  };
+
   const handleClickEmp = async (e) => {
     e.preventDefault();
     console.log(user);
@@ -63,6 +72,31 @@ function ViewProfile() {
       };
 
       setEmployeeProp(employeeProp);
+      setEmployeeUpdate(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateEmp = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const full_name = formData.get("full_name");
+    const address = formData.get("address");
+    const position = formData.get("position");
+    const employee2 = {
+      SSN: user,
+      full_name: full_name,
+      address: address,
+      position: position,
+    };
+    try {
+      const response = await axios.put(
+        "http://localhost:3001/updateEmployee",
+        employee2
+      );
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -70,13 +104,15 @@ function ViewProfile() {
 
   return (
     <>
-      {/* <h3 className="infoTitle">My Profile Settings</h3> */}
       {cus_emp ? (
         <div className="SecondTitle">
-          <h3 className="infoTitle">Welcome customer!</h3>
-          Press the button below to unlock your information. <br></br>
+          <h3 className="infoTitle">Welcome Customer!</h3>
+          Press to view or update your profile information <br></br>
           <button className="button btnStyle" onClick={handleClickCus}>
-            Press me
+            View
+          </button>
+          <button className="button btnStyle" onClick={handleClickEmp}>
+            Update
           </button>
           {customerProp && (
             <CustomerCard
@@ -89,11 +125,15 @@ function ViewProfile() {
         </div>
       ) : (
         <div className="SecondTitle">
-          <h3 className="infoTitle">Welcome Employee!</h3>Press the button below
-          to unlock your information.<br></br>
+          <h3 className="infoTitle">Welcome Employee!</h3> Press to view or
+          update your profile information <br></br>
           <button className="button btnStyle" onClick={handleClickEmp}>
-            Press me
+            View
           </button>
+          <button className="button btnStyle" onClick={handleEmpClick}>
+            Update
+          </button>
+          {employeeUpdate && <EmployeeUpdateForm updateEmp={updateEmp} />}
           {employeeProp && (
             <EmployeeCard
               full_name={employeeProp.full_name}
@@ -135,6 +175,27 @@ function CustomerCard(props) {
         </p>
       </div>
     </div>
+  );
+}
+
+function EmployeeUpdateForm(props) {
+  return (
+    <form className="register-form" onSubmit={props.updateEmp}>
+      <label htmlFor="name">Full Name</label>
+      <input
+        type="text"
+        name="full_name"
+        id="full_name"
+        placeholder="full Name"
+      />
+      <label htmlFor="Position">Position</label>
+      <input type="text" placeholder="position" id="position" name="position" />
+      <label htmlFor="Address">Address</label>
+      <input type="text" placeholder="address" id="address" name="address" />
+      <button className="updateBtn" type="submit">
+        Update user information
+      </button>
+    </form>
   );
 }
 
