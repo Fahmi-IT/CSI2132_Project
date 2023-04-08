@@ -74,7 +74,7 @@ FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID) ON DELETE CASCADE
 
 -- Schema for Booking
 CREATE TABLE booking (
-booking_ID CHAR(5) NOT NULL,
+booking_ID CHAR(10) NOT NULL,
 room_number INTEGER NOT NULL,
 start_date DATE NOT NULL,
 end_date DATE NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE renting (
 room_number INTEGER NOT NULL,
 check_in_date DATE NOT NULL,
 check_out_date DATE NOT NULL,
-booking_ID CHAR(5) NOT NULL,
+booking_ID CHAR(10) NOT NULL,
 customer_ID INT NOT NULL,
 FOREIGN KEY(room_number) REFERENCES room(room_number) ON DELETE CASCADE,
 FOREIGN KEY(booking_ID) REFERENCES booking(booking_ID) ON DELETE CASCADE,
