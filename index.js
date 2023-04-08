@@ -1,3 +1,12 @@
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'postgres',
+  password: 'Gr8Expectat1ons',
+  port: 5432,
+});
+
 const path = require('path')
 const express = require('express')
 const app = express()
@@ -55,18 +64,8 @@ app.get('/bookings', (req, res) => {
   })
 })
 
-app.post('/merchants', (req, res) => {
-  funcs.createRoom(req.body)
-  .then(response => {
-    res.status(200).send(response);
-  })
-  .catch(error => {
-    res.status(500).send(error);
-  })
-})
-
-app.delete('/merchants/:id', (req, res) => {
-  funcs.deleteRoom(req.params.id)
+app.get('/getCustomers', (req, res) => {
+  funcs.getCustomers()
   .then(response => {
     res.status(200).send(response);
   })

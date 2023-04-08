@@ -6,8 +6,8 @@ const app = express();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "DanaRoot5!",
-  database: "MyLittleSchema",
+  password: "Gr8Expectat1ons",
+  database: "db_project",
 });
 
 const bodyParser = require("body-parser");

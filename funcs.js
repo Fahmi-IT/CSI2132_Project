@@ -17,28 +17,6 @@ const getRooms = () => {
       })
     }) 
   }
-  const createRoom = (body) => {
-    return new Promise(function(resolve, reject) {
-      const { name, email } = body
-      pool.query('', [name, email], (error, results) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(`A new Room has been added added: ${results.rows[0]}`)
-      })
-    })
-  }
-  const deleteRoom = () => {
-    return new Promise(function(resolve, reject) {
-      const id = parseInt(request.params.id)
-      pool.query('', [id], (error, results) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(`Room deleted with ID: ${Room_ID}`)
-      })
-    })
-  }
   const getHotels = () => {
     return new Promise(function(resolve, reject) {
       pool.query('SELECT * FROM hotel', (error, results) => {
@@ -69,12 +47,21 @@ const getRooms = () => {
       })
     }) 
   }
-  
+  const getCustomers = () => {
+    return new Promise(function(resolve, reject) {
+      pool.query('SELECT * FROM customer', (error, results) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(results.rows);
+      })
+    }) 
+  }
+
   module.exports = {
     getRooms,
-    createRoom,
-    deleteRoom,
     getHotels,
     getHotelChains, 
-    getBookings, 
+    getBookings,
+    getCustomers,
   }
