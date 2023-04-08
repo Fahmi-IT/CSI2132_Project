@@ -108,20 +108,20 @@ function SearchBar() {
     return true;
   }
   function passFilter(room) {
-    let temp = findHotel(room);
-    let chainz = findHotelChain(temp);
+    var temp = findHotel(room);
+    var chainz = findHotelChain(temp);
     if (capacity != null) {
       if (parseInt(room.capacity) < parseInt(capacity)) {
         return false;
       }
     }
     if (price != null) {
-      if (parseInt(room.PPN) > parseInt(price)) {
+      if (parseFloat(room.PPN) > parseFloat(price)) {
         return false;
       }
     }
     if (rating != null) {
-      if (parseInt(temp.starRating) < parseInt(rating)) {
+      if (parseFloat(temp.starRating) < parseFloat(rating)) {
         return false;
       }
     }
@@ -154,13 +154,13 @@ function SearchBar() {
         roomers = [];
         for (let i = 0; i < obj.length; i++) {
           let temp = obj[i];
-          let roome = {
+          var roome = {
             roomNumber: temp["room_number"],
             amenities: temp["amenities"],
             problems: temp["problems"],   
             view: " " + temp["view"],
             PPN: temp["price_per_night"],
-            hotel_ID: temp["hotel_id"],
+            hotel_ID: temp["hotel_ID"],
             capacity: temp["capacity"],
             extendable: " " + temp["extendable"]
           }
@@ -179,7 +179,7 @@ function SearchBar() {
       for (let i = 0; i < obj.length; i++) {
         let temp = obj[i];
         let hotel = {
-          hotelID: temp["hotel_id"],
+          hotelID: temp["hotel_ID"],
           name: temp["name"],
           address: temp["address"],
           starRating: temp["star_rating"],
