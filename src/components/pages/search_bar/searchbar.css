@@ -21,3 +21,14 @@
     border-color: black;
     margin-right: 200px;
 }
+
+.popup {
+    background-color: green;
+    border-radius: 10px;
+}
+
+.bookNow {
+    border-radius: 12px;
+    width: 60px;
+    height: 40px;
+}

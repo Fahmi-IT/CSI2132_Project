@@ -1,64 +1,45 @@
 import React, {useState, useEffect} from 'react';
-import Popup from 'reactjs-popup';
 import "./searchbar.css";
+import axios from "axios";
 
 function SearchBar() {
   var roomers = [];
   var Hhotels = [];
   var Hhotel_chains = [];
   var Bbookings = [];
+  const [content, setContent] = useState({
+    capacity: 0,
+    price: null,
+    rating: 0,
+    numRooms: 0,
+    area: "",
+    chain: "",
+    startY: "",
+    startM: "",
+    startD: "",
+    endY: "",
+    endM: "",
+    endD: ""});
+  const [cc, setCC] = useState({
+    ccNumber: "",
+    CV: "",
+    expirationDate: ""
+  })
   const [bookings, setBookings] = useState(Bbookings);
   const [hotelChain, setHotelChain] = useState(Hhotel_chains);
   const [hotels, setHotels] = useState(Hhotels);
   const [rooms, setRooms] = useState(roomers);
-  const [capacity, setCapacity] = useState('');
-  const [price, setPrice] = useState('');
-  const [rating, setRating] = useState('');
-  const [numRooms, setNumRooms] = useState('');
-  const [area, setArea] = useState('');
-  const [chain, setChain] = useState('');
-  const [startY, setStartY] = useState('');
-  const [startM, setStartM] = useState('');
-  const [startD, setStartD] = useState('');
-  const [endY, setEndY] = useState('');
-  const [endM, setEndM] = useState('');
-  const [endD, setEndD] = useState('');
-  const handleCapacityChange = (e) => {
-    setCapacity(e.target.value);
-    console.log(capacity);
-  };
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+  const handleChange = (e) => {
+    setContent((prev) => ({
+      ...prev, 
+      [e.target.name]: e.target.value,
+    }))
   }
-  const handleRatingChange = (e) => {
-    setRating(e.target.value);
-  }
-  const handleNumRoomsChange = (e) => {
-    setNumRooms(e.target.value);
-  }
-  const handleAreaChange = (e) => {
-    setArea(e.target.value);
-  }
-  const handleChainChange = (e) => {
-    setChain(e.target.value);
-  }
-  const handleStartYChange = (e) => {
-    setStartY(e.target.value);
-  }
-  const handleStartMChange = (e) => {
-    setStartM(e.target.value);
-  }
-  const handleStartDChange = (e) => {
-    setStartD(e.target.value);
-  }
-  const handleEndYChange = (e) => {
-    setEndY(e.target.value);
-  }
-  const handleEndMChange = (e) => {
-    setEndM(e.target.value);
-  }
-  const handleEndDChange = (e) => {
-    setEndD(e.target.value);
+  const handleCCChange = (e) => {
+    setCC((prev) => ({
+      ...prev, 
+      [e.target.name]: e.target.value,
+    }))
   }
   useEffect(() => {
     getRooms();
@@ -66,6 +47,9 @@ function SearchBar() {
     getHotelChains();
     getBookings();
   }, []);
+  useEffect(() => {
+    getRooms();
+  }, [content])
   function findHotel(room) {
     for (let i = 0; i < hotels.length; i++) {
       if (hotels[i].hotelID === room.hotel_ID) {
@@ -85,11 +69,11 @@ function SearchBar() {
   function findBooking(room) {
     var from = 0;
     var to = 1;
-    if (startY != null && startM != null && startD != null) {
-      from = new Date(startY, startM, startD);
+    if (content.startY != null && content.startM != null && content.startD != null) {
+      from = new Date(content.startY, content.startM, content.startD);
     }
-    if (endY != null && endM != null && endD != null) {
-      to = new Date(endY, endM, endD);
+    if (content.endY != null && content.endM != null && content.endD != null) {
+      to = new Date(content.endY, content.endM, content.endD);
     }
     if (from === 0) {
       return false;
@@ -110,44 +94,45 @@ function SearchBar() {
   function passFilter(room) {
     var temp = findHotel(room);
     var chainz = findHotelChain(temp);
-    if (capacity != null) {
-      if (parseInt(room.capacity) < parseInt(capacity)) {
+    if (content.capacity != null) {
+      if (parseInt(room.capacity) < parseInt(content.capacity)) {
         return false;
       }
     }
-    if (price != null) {
-      if (parseFloat(room.PPN) > parseFloat(price)) {
+    if (content.price != null) {
+      if (parseFloat(room.PPN) > parseFloat(content.price)) {
         return false;
       }
     }
-    if (rating != null) {
-      if (parseFloat(temp.starRating) < parseFloat(rating)) {
+    if (content.rating != null) {
+      if (parseFloat(temp.starRating) < parseFloat(content.rating)) {
         return false;
       }
     }
-    if (numRooms != null) {
-      if (parseInt(temp.numberOfRooms) < parseInt(numRooms)) {
+    if (content.numRooms != null) {
+      if (parseInt(temp.numberOfRooms) < parseInt(content.numRooms)) {
         return false;
       }
     }
-    if (area != null && area.trim() !== "") {
-      if (!(temp.address.toLowerCase().includes(area.trim().toLowerCase()))) {
+    if (content.area !== null && content.area.trim() !== "") {
+      if (!(temp.address.toLowerCase().includes(content.area.trim().toLowerCase()))) {
         return false;
       }
     }
-    if (chain != null && chain.trim() !== "") {
-      if (!(chainz.name.toLowerCase().includes(chain.trimEnd().toLowerCase()))) {
+    if (content.chain !== null && content.chain.trim() !== "") {
+      if (!(chainz.name.toLowerCase().includes(content.chain.trimEnd().toLowerCase()))) {
         return false;
       }
     }
-    if (startY.trim() != "" && startM.trim() != "" && startD.trim() != "" && endY.trim() != "" && endM.trim() != "" && endD.trim() != "") {
+    if (content.startY.trim() !== "" && content.startM.trim() !== "" && content.startD.trim() !== "" && content.endY.trim() !== "" && content.endM.trim() !== "" && content.endD.trim() !== "") {
       if (!(findBooking(room))) {
         return false;
       }
     }
     return true;
   }
-  function getRooms() {
+  const getRooms = async () => {
+    console.log(1);
     fetch('http://localhost:3001/').then(response => {return response.text();})
       .then(data => {
         const obj = JSON.parse(data);
@@ -230,6 +215,22 @@ function SearchBar() {
       setBookings(Bbookings)
     })
   }
+  const submitBooking = async (e, number) => {
+    e.preventDefault();
+    console.log(new Date(2023, 0, 0));
+    if (!(cc.ccNumber.trim() === "" || cc.CV.trim() === "" || cc.expirationDate.trim() === "" || content.startY.trim() === "" || content.startM.trim() === "" || content.startD.trim() === "" || content.endY.trim() === "" || content.endM.trim() === "" || content.endD.trim() === "")) {
+      let start = new Date(content.startY, content.startM, content.startD);
+      let end = new Date(content.endY, content.endM, content.endD);
+      console.log(start);
+      const bookingMan = {booking_ID: "00006", room_number: number, start_date: start, end_date: end, customer_id: 367}
+      try {
+        await axios.post("http://localhost:3001/bookingsMake", bookingMan);
+        console.log("Booking added");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
   function Room({roomIT}) {
     return (
       <div class="listElem">
@@ -238,56 +239,49 @@ function SearchBar() {
         <p>Capacity: {roomIT.capacity}</p>
         <p>Extendable: {roomIT.extendable}</p>
         <p>Room #: {roomIT.roomNumber}</p>
-        <Popup trigger={<button>Book</button>} position="right center">
-          <div>
-          <form>
-            <label>Full Name</label>
-            <input type="text" />
-            <label>Credit Card Number</label>
-            <input type="text" />
-            <label>CV</label>
-            <input type="text" />
-            <label>Date of Expiration</label>
-            <input type="text" />
-          </form>
-          </div>
-        </Popup>
+        <button onClick={(event) => submitBooking(event, roomIT.roomNumber)}>Book</button>
       </div>
     )
   }
   return (
     <>
       <div width="100%">
+      <label>Credit Card Number</label>
+      <input name="ccNumber" onChange={handleCCChange} type="text"></input>
+      <label>CV</label>
+      <input name="CV" onChange={handleCCChange} type="text"></input>
+      <label>Date of Expiration</label>
+      <input name="expirationDate" onChange={handleCCChange} type="text"></input>
       <form class="searchFields">
         <h3>Search</h3>
         <label for="startDate">Start Date</label>
         <div>
-        <input onChange={handleStartYChange} placeholder="YYYY" type="number"/>
-        <input onChange={handleStartMChange} placeholder="MM" type="number"/>
-        <input onChange={handleStartDChange} placeholder="DD" type="number"/>
+        <input name="startY" onChange={handleChange} placeholder="YYYY" type="number"/>
+        <input name="startM" onChange={handleChange} placeholder="MM" type="number"/>
+        <input name="startD" onChange={handleChange} placeholder="DD" type="number"/>
         </div>
         <label for="endDate">End Date</label>
         <div>
-        <input onChange={handleEndYChange} placeholder="YYYY" type="number"/>
-        <input onChange={handleEndMChange} placeholder="MM" type="number"/>
-        <input onChange={handleEndDChange} placeholder="DD" type="number"/>
+        <input name="endY" onChange={handleChange} placeholder="YYYY" type="number"/>
+        <input name="endM" onChange={handleChange} placeholder="MM" type="number"/>
+        <input name="endD" onChange={handleChange} placeholder="DD" type="number"/>
         </div>
         <label for="capacity">Capacity</label>
-        <input onChange={handleCapacityChange} type="number"/>
+        <input name="capacity" onChange={handleChange} type="number"/>
         <label for="area">Area</label>
-        <input onChange={handleAreaChange} type="text"/>
+        <input name="area" onChange={handleChange} type="text"/>
         <label for="hotelChain">Hotel Chain</label>
-        <input onChange={handleChainChange} type="text"/>
+        <input name="chain" onChange={handleChange} type="text"/>
         <label for="rating">Rating</label>
-        <input onChange={handleRatingChange} type="number"/>
+        <input name="rating" onChange={handleChange} type="number"/>
         <label for="numberOfRooms">Number Of Rooms</label>
-        <input onChange={handleNumRoomsChange} type="number"/>
+        <input name="numRooms" onChange={handleChange} type="number"/>
         <label for="PPN">Price of Rooms</label>
-        <input onChange={handlePriceChange} type="text"/>
+        <input name="price" onChange={handleChange} type="text"/>
       </form>
-      <button onClick={getRooms()}>Fetch</button>
       </div>
-      <div class="containerList"><ul z-index="5">{rooms.map((roomba) => <Room roomIT={roomba}/>)}</ul></div>
+      <div class="containerList"><ul z-index="5">{rooms.map((roomba) => <Room roomIT={roomba}/>)}</ul>
+      </div>
     </>
   );
 }
