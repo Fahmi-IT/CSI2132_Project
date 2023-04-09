@@ -49,6 +49,26 @@ app.post("/customers", (req, res) => {
   });
 });
 
+app.post("/bookingsMake", (req, res) => {
+  let booking = req.body;
+  console.log(booking);
+  const sql =
+    "INSERT INTO booking (booking_ID, room_number, start_date, end_date, customer_ID) VALUES (?, ?, ?, ?, ?);";
+  const values = [
+    booking.booking_ID,
+    booking.room_number,
+    new Date(booking.start_date.toString()),
+    new Date(booking.end_date.toString()),
+    booking.customer_id
+  ];
+
+  db.query(sql, values, (err, results) => {
+    console.log(1);
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
 // CHECKING IF CUSTOMER EXISTS IE SIGN IN PAGE
 app.post("/signIn", (req, res) => {
   let customer = req.body;
@@ -136,6 +156,14 @@ app.get('/hotel_chain', (req, res) => {
 
 app.get('/bookings', (req, res) => {
   const sql = "SELECT * FROM booking";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
+app.get('/rentings', (req, res) => {
+  const sql = "SELECT * FROM renting";
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
