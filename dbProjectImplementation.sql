@@ -1,5 +1,8 @@
--- Database Project Implementation
--- Group 1: Fahmi Ahmed, Rahul Atre, Dana Shayakhmetova
+/* CSI2132 Course Project | Database Implementation in SQL | University of Ottawa
+-- Group 1: Fahmi Ahmed (300250180), Rahul Atre (300250370), Dana Shayakhmetova (300255907)
+-- This File is a List of DDLs that Create our Database Functionality 
+-- Data of Submission: 11/04/2023
+*/
 
 -- Schema for Hotel Chain
 CREATE TABLE hotel_chain (
@@ -13,14 +16,14 @@ PRIMARY KEY (name)
 CREATE TABLE phone_numbers (
 name VARCHAR(30) NOT NULL,
 phone_number CHAR(12) NOT NULL UNIQUE,
-FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
+FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE ON UPDATE CASCADE
  );
  
 -- Schema for multivalued-attribute contact_email_address
 CREATE TABLE contact_email_addresses (
 name VARCHAR(30) NOT NULL,
 contact_email_address VARCHAR(30) NOT NULL UNIQUE,  
-FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
+FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Schema for Hotel
@@ -34,7 +37,7 @@ phone_number CHAR(12) NOT NULL UNIQUE,
 number_of_rooms INTEGER NOT NULL CHECK (number_of_rooms > 0),
 manager VARCHAR(15) UNIQUE NOT NULL,
 PRIMARY KEY (hotel_ID),
-FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE
+FOREIGN KEY(name) REFERENCES hotel_chain(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Schema for Employee
@@ -45,13 +48,13 @@ full_name VARCHAR(40) NOT NULL,
 position VARCHAR(25) NOT NULL,
 hotel_ID CHAR(5) NOT NULL,
 PRIMARY KEY(SSN),
-FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID) ON DELETE CASCADE
+FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Schema for Customer
 CREATE TABLE customer (
-customer_ID INT NOT NULL AUTO_INCREMENT, -- Add passowrd for both customer and employee ASK FOR EMAIL AND GIVE THEM AN ID AND DON'T KEEP THE EMAIL
-SSN CHAR(9) NOT NULL, -- Just to store when a customer signs up -> generate a customer_ID later 
+customer_ID INT NOT NULL AUTO_INCREMENT, -- Storage of SSN is temporary | When a Customer signs up -> generate a customer_ID 
+SSN CHAR(9) NOT NULL, 
 address VARCHAR(30) NOT NULL,
 full_name VARCHAR(40) NOT NULL, 
 date_of_registration DATE NOT NULL,
@@ -69,7 +72,7 @@ extendable BOOLEAN NOT NULL,
 problems VARCHAR(50),
 hotel_ID CHAR(5) NOT NULL,
 PRIMARY KEY(room_number),
-FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID) ON DELETE CASCADE
+FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Schema for Booking
@@ -80,8 +83,8 @@ start_date DATE NOT NULL,
 end_date DATE NOT NULL,
 customer_ID INT NOT NULL,
 PRIMARY KEY(booking_id),
-FOREIGN KEY(room_number) REFERENCES room(room_number) ON DELETE CASCADE, 
-FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID) ON DELETE CASCADE
+FOREIGN KEY(room_number) REFERENCES room(room_number) ON DELETE CASCADE ON UPDATE CASCADE, 
+FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Schema for Renting
@@ -91,22 +94,10 @@ check_in_date DATE NOT NULL,
 check_out_date DATE NOT NULL,
 booking_ID CHAR(10) NOT NULL,
 customer_ID INT NOT NULL,
-FOREIGN KEY(room_number) REFERENCES room(room_number) ON DELETE CASCADE,
-FOREIGN KEY(booking_ID) REFERENCES booking(booking_ID) ON DELETE CASCADE,
-FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID) ON DELETE CASCADE
+FOREIGN KEY(room_number) REFERENCES room(room_number) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(booking_ID) REFERENCES booking(booking_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-/*
-DROP TABLE hotel_chain;
-DROP TABLE hotel;
-DROP TABLE phone_numbers;
-DROP TABLE contact_email_addresses;
-DROP TABLE employee;
-DROP TABLE customer;
-DROP TABLE room;
-DROP TABLE booking;
-DROP TABLE renting;
-*/
 
 -- Inserting values into tables
 
@@ -116,7 +107,8 @@ INSERT INTO hotel_chain VALUES ('Comfy Resort Corporation', 8, '23 Cronic Depres
                             ('Cosmopolitan Ltd', 8, 'Forest Hill Garden, Toronto ON'),
                             ('Ocean River Corporation', 9, '40 Colten Union, Vancouver BC'),
                             ('Green Palm Inc', 10, '32 Winifred Lodge, Montreal QC');
-                            
+
+-- Insert into hotel                           
 INSERT INTO hotel VALUES ('00001', 'Comfy Resort Corporation', '22 Richmond St, Ottawa ON', 3.5, 'ComfyBlock1@gmail.com', '647-333-2314', 5, 'Richard Moon'),
 						('00002', 'Comfy Resort Corporation', '23 Richmond St, Ottawa ON', 3.8, 'ComfyBlock2@gmail.com', '647-131-2433', 5, 'James Rob'),
                         ('00003', 'Comfy Resort Corporation', '24 Richmond St, Ottawa ON', 4.1, 'ComfyBlock3@gmail.com', '647-023-4951', 5, 'Stephanie Adn'),
@@ -161,7 +153,9 @@ INSERT INTO hotel VALUES ('00033', 'Green Palm Inc', '60 Winifred Road, Montreal
                         ('00038', 'Green Palm Inc', '65 Winifred Road, Montreal QC', 3.7, 'GreenPalm6@gmail.com', '647-349-3299', 5, 'Blake Landry'),
                         ('00039', 'Green Palm Inc', '66 Winifred Road, Montreal QC', 3.9, 'GreenPalm7@gmail.com', '182-437-2732', 5, 'Clarissa Blair'),
                         ('00040', 'Green Palm Inc', '67 Winifred Road, Montreal QC', 3.2, 'GreenPalm8@gmail.com', '123-324-2348', 5, 'Deshwan Wheeler');
-                        
+                    
+                    
+-- Insert into multi-valued attributes phone_numbers & contact_email_addresses
 INSERT INTO phone_numbers VALUES ('Comfy Resort Corporation', '412-325-324'), 
 								('Comfy Resort Corporation', '416-234-6876'),
                                 ('Paradise Beach Inc', '231-000-3100'),
@@ -186,6 +180,7 @@ INSERT INTO contact_email_addresses VALUES ('Comfy Resort Corporation', 'ComfyRe
                                 
                                 
 -- Insert Employee Data
+-- Hotel Chain #1 Employees
 INSERT INTO employee VALUES ('547-99-7550', '12 Rose Garden, Ottawa ON', 'Richard Moon', 'Manager', '00001'), 
 							('039-72-8581', '12 Bank Street, Ottawa ON', 'Kin Ge', 'Housekeeping & Service', '00001'), 
                             ('004-13-9177', '33 Village Area, Ottawa ON', 'James Rob', 'Manager', '00002'), 
@@ -203,7 +198,7 @@ INSERT INTO employee VALUES ('547-99-7550', '12 Rose Garden, Ottawa ON', 'Richar
                             ('988-03-5671', '99 Breezy Garden, Ottawa ON', 'William Lin', 'Manager', '00008'), 
                             ('999-25-3501', '32 Local Garden, Ottawa ON', 'Ron Smith', 'Housekeeping & Service', '00008');
                             
-                            
+-- Hotel Chain #2 Employees                            
 INSERT INTO employee VALUES ('457-11-3471', '13 Rose Garden, Ottawa ON', 'John Liu', 'Manager', '00009'), 
 							('329-52-3429', '21 Bank Street, Ottawa ON', 'Jay Park', 'Housekeeping & Service', '00009'), 
                             ('567-23-4353', 'Village Area, Ottawa ON', 'Alice Parker', 'Manager', '00010'), 
@@ -222,7 +217,7 @@ INSERT INTO employee VALUES ('457-11-3471', '13 Rose Garden, Ottawa ON', 'John L
                             ('800-76-5265', '13 Local Garden, Ottawa ON', 'John John', 'Housekeeping & Service', '00016');
                             
                             
-                            
+-- Hotel Chain #3 Employees                            
 INSERT INTO employee VALUES ('442-52-4323', '42 Rose Garden, Toronto ON', 'Alison Ray', 'Manager', '00017'), 
 							('974-88-6532', '34 Bank Street, Toronto ON', 'Brent Tim', 'Housekeeping & Service', '00017'), 
                             ('001-34-6488', '65 Village Area, Toronto ON', 'Brendon Liu', 'Manager', '00018'), 
@@ -240,7 +235,7 @@ INSERT INTO employee VALUES ('442-52-4323', '42 Rose Garden, Toronto ON', 'Aliso
                             ('952-67-4521', '45 Breezy Garden, Toronto ON', 'Miraya Park', 'Manager', '00024'), 
                             ('214-72-6431', '65 Local Garden, Toronto ON', 'Ashley Sosa', 'Housekeeping & Service', '00024');
 				
-                            
+-- Hotel Chain #4 Employees                            
 INSERT INTO employee VALUES ('534-11-6020', '43 Rose Garden, Vancouver BC', 'Ray Jin', 'Manager', '00025'), 
 							('645-12-6609', '54 Bank Street, Vancouver BC', 'Wilber Chandler', 'Housekeeping & Service', '00025'), 
                             ('435-13-8293', '23 Village Area, Vancouver BC', 'Jay Singh', 'Manager', '00026'), 
@@ -258,7 +253,7 @@ INSERT INTO employee VALUES ('534-11-6020', '43 Rose Garden, Vancouver BC', 'Ray
                             ('311-51-6185', '22 Breezy Garden, Vancouver BC', 'Porter Gibbs', 'Manager', '00032'), 
                             ('801-42-0011', '1 Local Garden, Vancouver BC', 'Emile Hendricks', 'Housekeeping & Service', '00032');
                             
-                            
+-- Hotel Chain #5 Employees                            
 INSERT INTO employee VALUES ('345-12-4357', '53 Rose Garden, Montreal QC', 'Lucas Klein', 'Manager', '00033'), 
 							('361-23-2048', '64 Bank Street, Montreal QC', 'Mason Liu', 'Housekeeping & Service', '00033'), 
                             ('453-53-5732', '34 Village Area, Montreal QC', 'Antony Nelson', 'Manager', '00034'), 
@@ -497,4 +492,16 @@ INSERT INTO room VALUES (4001, 69.99, '2-Bed, Bathroom, TV, Alarm, Desk w/ Chair
                         (4705, 300.99, '4-Bed, Toiletries, TV, Alarm, Desk w/ Chair, Lamp, AC/Heating, Fridge, WIFI, Fitness, Pool', 4, true, true, null, '00040');
 
 
--- Data for Customer, Booking, Renting will be added dynamically using the website
+
+-- SQL Commands to DROP Database Tables (If Required)
+/*
+DROP TABLE hotel_chain;
+DROP TABLE hotel;
+DROP TABLE phone_numbers;
+DROP TABLE contact_email_addresses;
+DROP TABLE employee;
+DROP TABLE customer;
+DROP TABLE room;
+DROP TABLE booking;
+DROP TABLE renting;
+*/
