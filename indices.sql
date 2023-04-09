@@ -1,10 +1,17 @@
+/* CSI2132 Course Project | SQL INDEXES | University of Ottawa
+-- Group 1: Fahmi Ahmed (300250180), Rahul Atre (300250370), Dana Shayakhmetova (300255907)
+-- This File implements three indexes on the relations of our database
+-- Data of Submission: 11/04/2023
+*/
+
+
 CREATE INDEX booking_ID ON Booking(booking_ID);
 
 CREATE INDEX duration_of_stay ON  Booking(start_date,end_date);
 
 CREATE INDEX amenities ON  Room(amenities);
 
--- I needed data for testing 
+/*--------------------------------Data for Testing Purposes--------------------------------*/
 
 -- INSERT INTO hotel_chain VALUES ('Comfy Resort Corporation', 8, 'Depression,Ottawa');
 
