@@ -1,0 +1,117 @@
+/* Use a cute font for all elements */
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Styling for the Bookings section */
+.bookings-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10rem;
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the Bookings header */
+.bookings-header {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0b3868;
+}
+
+/* Styling for the Bookings list */
+.bookings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Styling for each Booking item */
+.booking-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the Booking ID */
+.booking-id {
+  font-weight: bold;
+  color: #3a3a3a;
+}
+
+/* Styling for the Room number */
+.room-number {
+  font-style: italic;
+  color: #777777;
+}
+
+/* Styling for the Booking dates */
+.booking-dates {
+  font-size: 14px;
+  color: #3a3a3a;
+}
+
+.rentButton {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #3066a1;
+  color: #fff;
+}
+
+.updateButton {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #3066a1;
+  color: #fff;
+}
+
+.rentingForm {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+/* Add some margins for each label */
+.rentingForm label {
+  margin: 5px 10px 5px 0;
+}
+
+/* Style the input fields */
+.rentingForm input {
+  vertical-align: middle;
+  margin: 10px 10px 10px 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
