@@ -115,6 +115,10 @@ const Booking = () => {
       </h2>
       <ul class="bookings-list">
         {bookings.map((booking) => {
+          if (booking.booking_ID === "000") {
+            return null; // Skip this booking
+          }
+
           // console.log("look here" + booking.start_date);
           const startDateObj = new Date(booking.start_date);
           const endDateObj = new Date(booking.end_date);
