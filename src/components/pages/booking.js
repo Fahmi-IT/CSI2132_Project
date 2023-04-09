@@ -159,40 +159,45 @@ const Booking = () => {
           );
         })}
       </ul>
-      <h3> Create a Rent</h3>
-      <form className="rentingForm" onSubmit={createRent}>
-        <label htmlFor="room_numbe">Room Number</label>
-        <input
-          type="text"
-          name="room_number"
-          id="room_number"
-          placeholder="room_number"
-        />
-        <label htmlFor="Check_in_date">Check In Date</label>
-        <input
-          type="date"
-          placeholder="check_in_date"
-          id="check_in_dates"
-          name="check_in_date"
-        />
-        <label htmlFor="Check_out_date">Check Out Date</label>
-        <input
-          type="date"
-          placeholder="check_out_date"
-          id="check_out_dates"
-          name="check_out_date"
-        />
-        <label htmlFor="customer_ID">Customer Id</label>
-        <input
-          type="text"
-          name="customer_ID"
-          id="customer_ID"
-          placeholder="customer_ID"
-        />
-        <button className="rentButton" type="submit">
-          Make a renting
-        </button>
-      </form>
+
+      {cus_emp ? null : (
+        <div>
+          <h3>Create a Rent</h3>
+          <form className="rentingForm" onSubmit={createRent}>
+            <label htmlFor="room_numbe">Room Number</label>
+            <input
+              type="text"
+              name="room_number"
+              id="room_number"
+              placeholder="room_number"
+            />
+            <label htmlFor="Check_in_date">Check In Date</label>
+            <input
+              type="date"
+              placeholder="check_in_date"
+              id="check_in_dates"
+              name="check_in_date"
+            />
+            <label htmlFor="Check_out_date">Check Out Date</label>
+            <input
+              type="date"
+              placeholder="check_out_date"
+              id="check_out_dates"
+              name="check_out_date"
+            />
+            <label htmlFor="customer_ID">Customer Id</label>
+            <input
+              type="text"
+              name="customer_ID"
+              id="customer_ID"
+              placeholder="customer_ID"
+            />
+            <button className="rentButton" type="submit">
+              Make a renting
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
