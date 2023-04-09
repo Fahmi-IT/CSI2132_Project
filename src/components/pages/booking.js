@@ -77,6 +77,37 @@ const Booking = () => {
     }
   };
 
+  const createRent = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const room_number = formData.get("room_number");
+    const check_in_date = formData.get("check_in_date");
+    const check_out_date = formData.get("check_out_date");
+    const customer_ID = formData.get("customer_ID");
+
+    const rent = {
+      booking_ID: "000",
+      check_in_date: check_in_date,
+      check_out_date: check_out_date,
+      room_number: room_number,
+      customer_ID: customer_ID,
+    };
+
+    // IF BOOKING ID = 000 then renting was made directly
+    // had to create a null user and a null booking Id with ID 000
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/insertRenting",
+        rent
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div class="bookings-section">
       <h2 class="bookings-header">
@@ -124,6 +155,40 @@ const Booking = () => {
           );
         })}
       </ul>
+      <h3> Create a Rent</h3>
+      <form className="rentingForm" onSubmit={createRent}>
+        <label htmlFor="room_numbe">Room Number</label>
+        <input
+          type="text"
+          name="room_number"
+          id="room_number"
+          placeholder="room_number"
+        />
+        <label htmlFor="Check_in_date">Check In Date</label>
+        <input
+          type="date"
+          placeholder="check_in_date"
+          id="check_in_dates"
+          name="check_in_date"
+        />
+        <label htmlFor="Check_out_date">Check Out Date</label>
+        <input
+          type="date"
+          placeholder="check_out_date"
+          id="check_out_dates"
+          name="check_out_date"
+        />
+        <label htmlFor="customer_ID">Customer Id</label>
+        <input
+          type="text"
+          name="customer_ID"
+          id="customer_ID"
+          placeholder="customer_ID"
+        />
+        <button className="rentButton" type="submit">
+          Make a renting
+        </button>
+      </form>
     </div>
   );
 };
