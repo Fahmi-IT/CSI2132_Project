@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import "./searchbar.css";
+import { UserContext } from "../../../App.js";
 import axios from "axios";
 
 function SearchBar() {
@@ -7,6 +8,15 @@ function SearchBar() {
   var Hhotels = [];
   var Hhotel_chains = [];
   var Bbookings = [];
+  var rrentings = [];
+  const { loggedIn, cus_emp } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [customerID, setCustomerID] = useState('');
+  useEffect(() => {
+    if (!loggedIn) {
+      window.location.replace("http://localhost:3000/signup");
+    }
+  }, [loggedIn]);
   const [content, setContent] = useState({
     capacity: 0,
     price: null,
@@ -29,6 +39,7 @@ function SearchBar() {
   const [hotelChain, setHotelChain] = useState(Hhotel_chains);
   const [hotels, setHotels] = useState(Hhotels);
   const [rooms, setRooms] = useState(roomers);
+  const [rentings, setRentings] = useState(rrentings);
   const handleChange = (e) => {
     setContent((prev) => ({
       ...prev, 
@@ -46,6 +57,7 @@ function SearchBar() {
     getHotels();
     getHotelChains();
     getBookings();
+    getRentings();
   }, []);
   useEffect(() => {
     getRooms();
@@ -91,6 +103,31 @@ function SearchBar() {
     }
     return true;
   }
+  function findRenting(room) {
+    var from = 0;
+    var to = 1;
+    if (content.startY != null && content.startM != null && content.startD != null) {
+      from = new Date(content.startY, content.startM, content.startD);
+    }
+    if (content.endY != null && content.endM != null && content.endD != null) {
+      to = new Date(content.endY, content.endM, content.endD);
+    }
+    if (from === 0) {
+      return false;
+    } else if (from > to) {
+      return false;
+    }
+    for (let i = 0; i < rentings.length; i++) {
+      if (rentings[i].roomNumber === room.roomNumber) {
+        let pre = new Date(rentings[i].checkIn.substring(0, 4), rentings[i].checkIn.substring(5, 7), rentings[i].checkIn.substring(8, 10));
+        let post = new Date(rentings[i].checkOut.substring(0, 4), rentings[i].checkOut.substring(5, 7), rentings[i].checkOut.substring(8, 10));
+        if ((from < pre && to > post) || (from > pre && to < post) || (from < pre && to < post) || (from > pre && to < post)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
   function passFilter(room) {
     var temp = findHotel(room);
     var chainz = findHotelChain(temp);
@@ -126,6 +163,11 @@ function SearchBar() {
     }
     if (content.startY.trim() !== "" && content.startM.trim() !== "" && content.startD.trim() !== "" && content.endY.trim() !== "" && content.endM.trim() !== "" && content.endD.trim() !== "") {
       if (!(findBooking(room))) {
+        return false;
+      }
+    }
+    if (content.startY.trim() !== "" && content.startM.trim() !== "" && content.startD.trim() !== "" && content.endY.trim() !== "" && content.endM.trim() !== "" && content.endD.trim() !== "") {
+      if (!(findRenting(room))) {
         return false;
       }
     }
@@ -215,20 +257,52 @@ function SearchBar() {
       setBookings(Bbookings)
     })
   }
+  function getCustomer() {
+    fetch('http://localhost:3001/getCustomers').then(response => {return response.text();})
+    .then(data => {
+      const obj = JSON.parse(data);
+      for (let i = 0; i < obj.length; i++) {
+        let temp = obj[i];
+        if (temp["SSN"] === user) {
+          setCustomerID(temp["customer_ID"])
+        }
+      }
+    });
+  }
+  function getRentings() {
+    fetch('http://localhost:3001/rentings').then(response => {
+      return response.text();
+    }).then(data => {
+      const obj = JSON.parse(data);
+      Bbookings = [];
+      for (let i = 0; i < obj.length; i++) {
+        let temp = obj[i]
+        let rent = {
+          roomNumber: temp["room_number"],
+          checkIn: temp["check_in_date"],
+          checkOut: temp["check_out_date"],
+          bookingID: temp["booking_ID"],
+          customerID: temp["customer_ID"]
+        }
+        rrentings.push(rent);
+      }
+      setRentings(rrentings);
+    })
+  }
   const submitBooking = async (e, number) => {
     e.preventDefault();
-    console.log(new Date(2023, 0, 0));
+    getCustomer();
     if (!(cc.ccNumber.trim() === "" || cc.CV.trim() === "" || cc.expirationDate.trim() === "" || content.startY.trim() === "" || content.startM.trim() === "" || content.startD.trim() === "" || content.endY.trim() === "" || content.endM.trim() === "" || content.endD.trim() === "")) {
       let start = new Date(content.startY, content.startM, content.startD);
       let end = new Date(content.endY, content.endM, content.endD);
       console.log(start);
-      const bookingMan = {booking_ID: "00006", room_number: number, start_date: start, end_date: end, customer_id: 367}
+      const bookingMan = {booking_ID: "00007", room_number: number, start_date: start, end_date: end, customer_id: customerID}
       try {
         await axios.post("http://localhost:3001/bookingsMake", bookingMan);
         console.log("Booking added");
       } catch (err) {
         console.log(err);
-      }
+      } 
     }
   }
   function Room({roomIT}) {
