@@ -1,3 +1,10 @@
+/* CSI2132 Course Project | Database Triggers in SQL | University of Ottawa
+-- Group 1: Fahmi Ahmed (300250180), Rahul Atre (300250370), Dana Shayakhmetova (300255907)
+-- This file contains the necessary SQL Triggers for Increment/Decrement 
+-- Data of Submission: 11/04/2023
+*/
+
+
 CREATE OR REPLACE FUNCTION decrement_numRooms()
 RETURNS TRIGGER AS
 $$
