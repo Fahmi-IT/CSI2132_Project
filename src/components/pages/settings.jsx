@@ -217,7 +217,7 @@ function CustomerCard(props) {
 
 function EmployeeUpdateForm(props) {
   return (
-    <form className="register-form" onSubmit={props.updateEmp}>
+    <form className="update-form" onSubmit={props.updateEmp}>
       <label htmlFor="name">Full Name</label>
       <input
         type="text"
@@ -238,7 +238,7 @@ function EmployeeUpdateForm(props) {
 
 function CustomerUpdateForm(props) {
   return (
-    <form className="register-form" onSubmit={props.updateCus}>
+    <form className="update-form" onSubmit={props.updateCus}>
       <label htmlFor="name">Full Name</label>
       <input
         type="text"
