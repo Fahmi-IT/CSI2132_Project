@@ -4,6 +4,8 @@
 -- Data of Submission: 11/04/2023
 */
 
+/*------------------------------------------------------CREATE TABLES------------------------------------------------------*/
+
 -- Schema for Hotel Chain
 CREATE TABLE hotel_chain (
 name VARCHAR(30) NOT NULL,
@@ -99,7 +101,8 @@ FOREIGN KEY(booking_ID) REFERENCES booking(booking_ID) ON DELETE CASCADE ON UPDA
 FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Inserting values into tables
+
+/*------------------------------------------------------INSERT DATA INTO TABLES------------------------------------------------------*/
 
 -- Insert into hotel_chain
 INSERT INTO hotel_chain VALUES ('Comfy Resort Corporation', 8, '23 Cronic Depression St, Ottawa ON'),
@@ -492,6 +495,7 @@ INSERT INTO room VALUES (4001, 69.99, '2-Bed, Bathroom, TV, Alarm, Desk w/ Chair
                         (4705, 300.99, '4-Bed, Toiletries, TV, Alarm, Desk w/ Chair, Lamp, AC/Heating, Fridge, WIFI, Fitness, Pool', 4, true, true, null, '00040');
 
 
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 -- SQL Commands to DROP Database Tables (If Required)
 /*
