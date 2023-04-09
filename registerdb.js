@@ -204,6 +204,14 @@ app.get("/getBookings", (req, res) => {
   });
 });
 
+app.get('/rentings', (req, res) => {
+  const sql = "SELECT * FROM renting";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
 // MAKE A RENTING
 app.post("/insertRenting", (req, res) => {
   let renting = req.body;

@@ -63,7 +63,6 @@ app.post("/bookingsMake", (req, res) => {
   ];
 
   db.query(sql, values, (err, results) => {
-    console.log(1);
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
@@ -169,6 +168,30 @@ app.get('/rentings', (req, res) => {
     return res.json(results);
   });
 })
+
+app.post("/insertRenting", (req, res) => {
+  let renting = req.body;
+  console.log(renting.room_number);
+  console.log(renting.check_in_date);
+  console.log(renting.check_out_date);
+  console.log(renting.booking_ID);
+  console.log(renting.customer_ID);
+
+  const sql =
+    "INSERT INTO renting (room_number, check_in_date, check_out_date, booking_ID, customer_ID) VALUES (?, ?, ?, ?, ?);";
+  const values = [
+    renting.room_number,
+    renting.check_in_date,
+    renting.check_out_date,
+    renting.booking_ID,
+    renting.customer_ID,
+  ];
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
