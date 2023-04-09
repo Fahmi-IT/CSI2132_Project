@@ -96,7 +96,7 @@ function SearchBar() {
       if (bookings[i].roomNumber === room.roomNumber) {
         let pre = new Date(bookings[i].startDate.substring(0, 4), bookings[i].startDate.substring(5, 7), bookings[i].startDate.substring(8, 10));
         let post = new Date(bookings[i].endDate.substring(0, 4), bookings[i].endDate.substring(5, 7), bookings[i].endDate.substring(8, 10));
-        if ((from < pre && to > post) || (from > pre && to < post) || (from < pre && to < post) || (from > pre && to < post)) {
+        if ((from <= pre && to >= post) || (from >= pre && to <= post) || (from <= pre && to <= post) || (from >= pre && to <= post)) {
           return false;
         }
       }
