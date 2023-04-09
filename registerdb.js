@@ -180,6 +180,55 @@ app.put("/updateCustomer", (req, res) => {
   });
 });
 
+// GET A CUSTOMER'S BOOKINGS
+app.post("/getCusBookings", (req, res) => {
+  let customer2 = req.body;
+  // console.log("The SSN of customer is " + customer2.SSN);
+  const sql =
+    "SELECT * FROM booking WHERE customer_ID = (SELECT customer_ID FROM customer WHERE SSN = " +
+    customer2.SSN +
+    ")";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
+// GET ALL BOOKINGS (EMPLOYEE)
+app.get("/getBookings", (req, res) => {
+  const sql = "SELECT * FROM booking";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+// MAKE A RENTING
+app.post("/insertRenting", (req, res) => {
+  let renting = req.body;
+  console.log(renting.room_number);
+  console.log(renting.check_in_date);
+  console.log(renting.check_out_date);
+  console.log(renting.booking_ID);
+  console.log(renting.customer_ID);
+
+  const sql =
+    "INSERT INTO renting (room_number, check_in_date, check_out_date, booking_ID, customer_ID) VALUES (?, ?, ?, ?, ?);";
+  const values = [
+    renting.room_number,
+    renting.check_in_date,
+    renting.check_out_date,
+    renting.booking_ID,
+    renting.customer_ID,
+  ];
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
 app.listen(3001, () => {
