@@ -204,13 +204,13 @@ app.get("/getBookings", (req, res) => {
   });
 });
 
-app.get('/rentings', (req, res) => {
+app.get("/rentings", (req, res) => {
   const sql = "SELECT * FROM renting";
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
 // MAKE A RENTING
 app.post("/insertRenting", (req, res) => {
@@ -247,11 +247,34 @@ app.post("/bookingsMake", (req, res) => {
     booking.room_number,
     new Date(booking.start_date.toString()),
     new Date(booking.end_date.toString()),
-    booking.customer_id
+    booking.customer_id,
   ];
 
   db.query(sql, values, (err, results) => {
     if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+// UPDATE HOTEL INFO
+app.put("/updateHotel", (req, res) => {
+  let hotelInfo = req.body;
+  const sql =
+    "UPDATE hotel SET address = '" +
+    hotelInfo.address +
+    "', star_rating = '" +
+    hotelInfo.star_rating +
+    "', contact_email = '" +
+    hotelInfo.contact_email +
+    "', number_of_rooms = '" +
+    hotelInfo.number_of_rooms +
+    "', manager = '" +
+    hotelInfo.manager +
+    "' WHERE hotel_ID = " +
+    hotelInfo.hotel_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
     return res.json(results);
   });
 });
