@@ -495,6 +495,29 @@ INSERT INTO room VALUES (4001, 69.99, '2-Bed, Bathroom, TV, Alarm, Desk w/ Chair
                         (4705, 300.99, '4-Bed, Toiletries, TV, Alarm, Desk w/ Chair, Lamp, AC/Heating, Fridge, WIFI, Fitness, Pool', 4, true, true, null, '00040');
 
 
+/*----------------------------------------------------------------------EXAMPLE QUERIES----------------------------------------------------------------------*/
+
+-- Hotels that have a rating of 4 or higher
+SELECT * FROM hotel WHERE star_rating >= 4;
+
+
+-- Show all rooms from every hotel_chain that have a view, that are extendable, and have no problems
+SELECT price_per_night, amenities, capacity FROM room WHERE view = true AND extendable = true AND problems IS NULL;
+
+
+-- All Employees that work at Paradise Beach Hotel Chain
+SELECT full_name, position FROM employee WHERE hotel_ID IN (
+	SELECT hotel_ID FROM hotel WHERE name = 'Paradise Beach Inc'
+);
+
+
+-- All rooms that provide AC/Heating functionality that are in Ottawa
+SELECT * FROM room WHERE amenities LIKE '%AC/Heating%' 
+AND hotel_ID IN (
+	SELECT hotel_ID FROM hotel WHERE address LIKE '%Ottawa%'
+)
+ORDER BY room_number;
+
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 -- SQL Commands to DROP Database Tables (If Required)
