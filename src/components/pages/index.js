@@ -39,7 +39,7 @@ const Home = () => {
           <div class="buttonDiv">
             <btn
               onClick={(event) => (window.location.href = "/search")}
-              class="button btnStyle"
+              class="button1 btnStyle"
             >
               Book Now!
             </btn>

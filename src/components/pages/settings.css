@@ -49,9 +49,9 @@ h4 {
   margin-bottom: 10px;
 }
 
-.button {
+.button2 {
   width: 170px;
-  height: 60px;
+  height: 70px;
   color: #fff;
   border-radius: 5px;
   margin-top: 5%;
@@ -69,12 +69,16 @@ h4 {
   font-size: 25px;
 }
 
-.btnStyle {
+.btnStyle2 {
   background-color: #1e78d7;
   border: none;
   z-index: 1;
 }
-.btnStyle:after {
+
+.extraBut {
+  margin-left: 10px;
+}
+.btnStyle2:after {
   position: absolute;
   content: "";
   width: 100%;
@@ -88,15 +92,16 @@ h4 {
   box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
     7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
   transition: all 0.3s ease;
+  /* padding: 0; */
 }
-.btnStyle:hover {
+.btnStyle2:hover {
   color: #fff;
 }
-.btnStyle:hover:after {
+.btnStyle2:hover:after {
   top: 0;
   height: 100%;
 }
-.btnStyle:active {
+.btnStyle2:active {
   top: 2px;
 }
 
