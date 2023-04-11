@@ -260,6 +260,20 @@ app.put("/updateHotel", (req, res) => {
   });
 });
 
+// GET A CUSTOMER'S BOOKINGS
+app.post("/getCusBookings", (req, res) => {
+  let customer2 = req.body;
+  const sql =
+    "SELECT * FROM booking WHERE customer_ID = (SELECT customer_ID FROM customer WHERE SSN = " +
+    customer2.SSN +
+    ")";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
 app.listen(3001, () => {
