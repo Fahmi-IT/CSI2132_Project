@@ -29,12 +29,11 @@ const Booking = () => {
     const url = cus_emp
       ? "http://localhost:3001/getCusBookings"
       : "http://localhost:3001/getBookings";
-
     const method = cus_emp ? axios.post : axios.get;
-
     method(url, customer)
       .then((response) => {
         setBookings(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -42,7 +41,6 @@ const Booking = () => {
   }, [cus_emp, customer]);
 
   const rentBooking = async (booking) => {
-    // console.log(booking.start_date);
     const dateStart = booking.start_date;
     const dateObjS = new Date(dateStart);
     const yearS = dateObjS.getFullYear();
@@ -107,7 +105,6 @@ const Booking = () => {
       console.log(err);
     }
   };
-
   return (
     <div class="bookings-section">
       <h2 class="bookings-header">
