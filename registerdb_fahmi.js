@@ -59,7 +59,7 @@ app.post("/bookingsMake", (req, res) => {
     booking.room_number,
     new Date(booking.start_date.toString()),
     new Date(booking.end_date.toString()),
-    booking.customer_id
+    booking.customer_id,
   ];
 
   db.query(sql, values, (err, results) => {
@@ -129,45 +129,45 @@ app.post("/getEmployeeSettings", (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   const sql = "SELECT * FROM room";
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
-app.get('/hotel', (req, res) => {
+app.get("/hotel", (req, res) => {
   const sql = "SELECT * FROM hotel";
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
-app.get('/hotel_chain', (req, res) => {
+app.get("/hotel_chain", (req, res) => {
   const sql = "SELECT * FROM hotel_chain";
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
-app.get('/bookings', (req, res) => {
+app.get("/bookings", (req, res) => {
   const sql = "SELECT * FROM booking";
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
-app.get('/rentings', (req, res) => {
+app.get("/rentings", (req, res) => {
   const sql = "SELECT * FROM renting";
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
 app.post("/insertRenting", (req, res) => {
   let renting = req.body;
@@ -199,7 +199,7 @@ app.get("/view1", (req, res) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
 app.get("/view2", (req, res) => {
   const sql = "SELECT * FROM capacity_of_all_rooms";
@@ -207,7 +207,58 @@ app.get("/view2", (req, res) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
+
+app.post("/bookingsMake", (req, res) => {
+  let booking = req.body;
+  console.log(booking);
+  const sql =
+    "INSERT INTO booking (booking_ID, room_number, start_date, end_date, customer_ID) VALUES (?, ?, ?, ?, ?);";
+  const values = [
+    booking.booking_ID,
+    booking.room_number,
+    new Date(booking.start_date.toString()),
+    new Date(booking.end_date.toString()),
+    booking.customer_id,
+  ];
+
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+// GET ALL BOOKINGS (EMPLOYEE)
+app.get("/getBookings", (req, res) => {
+  const sql = "SELECT * FROM booking";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+// UPDATE HOTEL INFO
+app.put("/updateHotel", (req, res) => {
+  let hotelInfo = req.body;
+  const sql =
+    "UPDATE hotel SET address = '" +
+    hotelInfo.address +
+    "', star_rating = '" +
+    hotelInfo.star_rating +
+    "', contact_email = '" +
+    hotelInfo.contact_email +
+    "', number_of_rooms = '" +
+    hotelInfo.number_of_rooms +
+    "', manager = '" +
+    hotelInfo.manager +
+    "' WHERE hotel_ID = " +
+    hotelInfo.hotel_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
