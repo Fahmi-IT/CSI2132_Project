@@ -302,7 +302,10 @@ function SearchBar() {
         console.log("Booking added");
       } catch (err) {
         console.log(err);
-      } 
+      }
+      alert("Booking Successful.");
+    } else {
+      alert("Error. Unable to book. Please review credentials.");
     }
   }
   function Room({roomIT}) {
@@ -320,39 +323,62 @@ function SearchBar() {
   return (
     <>
       <div width="100%">
-      <label>Credit Card Number</label>
-      <input name="ccNumber" onChange={handleCCChange} type="text"></input>
-      <label>CV</label>
-      <input name="CV" onChange={handleCCChange} type="text"></input>
-      <label>Date of Expiration</label>
-      <input name="expirationDate" onChange={handleCCChange} type="text"></input>
-      <form class="searchFields">
-        <h3>Search</h3>
-        <label for="startDate">Start Date</label>
-        <div>
-        <input name="startY" onChange={handleChange} placeholder="YYYY" type="number"/>
+      <div className="dates">
+        <table className="anotherTable">
+        <tr><td className="smolPad"><label for="startDate">Start Date</label></td></tr>
+        <tr><td><input name="startY" onChange={handleChange} placeholder="YYYY" type="number"/>
         <input name="startM" onChange={handleChange} placeholder="MM" type="number"/>
-        <input name="startD" onChange={handleChange} placeholder="DD" type="number"/>
-        </div>
-        <label for="endDate">End Date</label>
-        <div>
-        <input name="endY" onChange={handleChange} placeholder="YYYY" type="number"/>
+        <input name="startD" onChange={handleChange} placeholder="DD" type="number"/></td></tr>
+        <tr><td><label for="endDate">End Date</label></td></tr>
+        <tr><td><input name="endY" onChange={handleChange} placeholder="YYYY" type="number"/>
         <input name="endM" onChange={handleChange} placeholder="MM" type="number"/>
         <input name="endD" onChange={handleChange} placeholder="DD" type="number"/>
+        </td></tr>
+        </table>
         </div>
-        <label for="capacity">Capacity</label>
-        <input name="capacity" onChange={handleChange} type="number"/>
-        <label for="area">Area</label>
-        <input name="area" onChange={handleChange} type="text"/>
-        <label for="hotelChain">Hotel Chain</label>
-        <input name="chain" onChange={handleChange} type="text"/>
-        <label for="rating">Rating</label>
-        <input name="rating" onChange={handleChange} type="number"/>
-        <label for="numberOfRooms">Number Of Rooms</label>
-        <input name="numRooms" onChange={handleChange} type="number"/>
-        <label for="PPN">Price of Rooms</label>
-        <input name="price" onChange={handleChange} type="text"/>
-      </form>
+        <table>
+        <div className="options">
+        <tr><td>
+        <table>
+        <tr><td><label for="capacity">Capacity</label></td>
+        <td><input name="capacity" onChange={handleChange} type="number"/></td></tr>
+        <tr><td><label for="area">Area</label></td>
+        <td><input name="area" onChange={handleChange} type="text"/></td></tr>
+        <tr><td><label for="hotelChain">Hotel Chain</label></td>
+        <td><input name="chain" onChange={handleChange} type="text"/></td></tr>
+        </table>
+        </td>
+        <td>
+        <table className="smallPad">
+        <tr><td><label for="rating">Rating</label></td>
+        <td><input name="rating" onChange={handleChange} type="number"/></td></tr>
+        <tr><td><label for="numberOfRooms">Number Of Rooms</label></td>
+        <td><input name="numRooms" onChange={handleChange} type="number"/></td></tr>
+        <tr><td><label for="PPN">Price of Rooms</label></td>
+        <td><input name="price" onChange={handleChange} type="text"/></td></tr>
+        </table>
+        </td>
+        </tr>
+        </div>
+        <tr>
+          <td>
+          <table className="cc">
+          <tr>
+          <td><label>Credit Card Number</label></td>
+          <td><input name="ccNumber" onChange={handleCCChange} type="text"></input></td>
+          </tr>
+          <tr>
+          <td><label>CV</label></td>
+          <td><input name="CV" onChange={handleCCChange} type="text"></input></td>
+          </tr>
+          <tr>
+          <td><label>Date of Expiration</label></td>
+          <td><input name="expirationDate" onChange={handleCCChange} type="text"></input></td>
+          </tr>
+          </table>
+          </td>
+        </tr>
+        </table>
       </div>
       <div class="containerList"><ul z-index="5">{rooms.map((roomba) => <Room roomIT={roomba}/>)}</ul>
       </div>
