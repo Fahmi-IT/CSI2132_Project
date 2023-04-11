@@ -79,7 +79,7 @@ FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID) ON DELETE CASCADE ON UPDATE CAS
 
 -- Schema for Booking
 CREATE TABLE booking (
-booking_ID CHAR(10) NOT NULL,
+booking_ID CHAR(10) NOT NULL AUTO_INCREMENT,
 room_number INTEGER NOT NULL,
 start_date DATE NOT NULL,
 end_date DATE NOT NULL,
