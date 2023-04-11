@@ -279,6 +279,22 @@ app.put("/updateHotel", (req, res) => {
   });
 });
 
+app.get("/view1", (req, res) => {
+  const sql = "SELECT * FROM available_rooms_per_area";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
+app.get("/view2", (req, res) => {
+  const sql = "SELECT * FROM capacity_of_all_rooms";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
 app.listen(3001, () => {
