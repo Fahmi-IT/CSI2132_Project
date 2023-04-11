@@ -18,11 +18,12 @@ function Hotels() {
   const [employeeProp, setEmployeeProp] = useState({
     SSN: user,
   });
-
   const [hotels, setHotels] = useState([]);
   const [canViewHotels, setCanViewHotels] = useState("");
   const [canUpdate, setCanUpdate] = useState("");
   const [isManager, setManager] = useState("");
+  const [canDeleteCustomer, setDeleteCus] = useState("");
+  const [canDeleteEmployee, setDeleteEmp] = useState("");
 
   useEffect(() => {
     if (!cus_emp && loggedIn) {
@@ -32,6 +33,22 @@ function Hotels() {
 
   const click = async (e) => {
     setCanUpdate(true);
+    setCanViewHotels(false);
+    setDeleteCus(false);
+    setDeleteEmp(false);
+  };
+
+  const click2 = async (e) => {
+    setDeleteCus(true);
+    setDeleteEmp(false);
+    setCanUpdate(false);
+    setCanViewHotels(false);
+  };
+
+  const click3 = async (e) => {
+    setDeleteEmp(true);
+    setDeleteCus(false);
+    setCanUpdate(false);
     setCanViewHotels(false);
   };
 
@@ -59,12 +76,40 @@ function Hotels() {
     }
   };
 
+  // const getAllEmployees = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:3001/employee");
+  //     setHotels(response.data);
+  //     setCanViewHotels(true);
+  //     setCanUpdate(false);
+  //     setDeleteCus(false);
+  //     setDeleteEmp(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const getAllCustomers = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:3001/getCustomers");
+  //     setHotels(response.data);
+  //     setCanViewHotels(true);
+  //     setCanUpdate(false);
+  //     setDeleteCus(false);
+  //     setDeleteEmp(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   const getAllHotels = async () => {
     try {
       const response = await axios.get("http://localhost:3001/hotel", user);
       setHotels(response.data);
       setCanViewHotels(true);
       setCanUpdate(false);
+      setDeleteCus(false);
+      setDeleteEmp(false);
     } catch (err) {
       console.log(err);
     }
@@ -100,6 +145,83 @@ function Hotels() {
       console.log(err);
     }
   };
+
+  const deleteCus = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const customer_ID = formData.get("customer_ID");
+    const customer = {
+      customer_ID: customer_ID,
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/deleteCustomer",
+        customer
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deleteEmp = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const employee_ID = formData.get("employee_ID");
+    const employee = {
+      employee_ID: employee_ID,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/deleteEmployee",
+        employee
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  function DeleteCustomer() {
+    return (
+      <form className="update-hotel-form" onSubmit={deleteCus}>
+        <h3>Delete Customer</h3>
+
+        <label htmlFor="Address">Customer ID</label>
+        <input
+          type="text"
+          placeholder="customer_ID"
+          id="customer_ID"
+          name="customer_ID"
+        />
+        <button className="updateBtn" type="submit">
+          Delete Customer
+        </button>
+      </form>
+    );
+  }
+
+  function DeleteEmployee() {
+    return (
+      <form className="update-hotel-form" onSubmit={deleteEmp}>
+        <h3>Delete Employee</h3>
+
+        <label htmlFor="Address">Employee ID</label>
+        <input
+          type="text"
+          placeholder="employee_ID"
+          id="employee_ID"
+          name="employee_ID"
+        />
+        <button className="updateBtn" type="submit">
+          Delete Employee
+        </button>
+      </form>
+    );
+  }
 
   function UpdateHotelForm() {
     return (
@@ -163,11 +285,32 @@ function Hotels() {
           <button className="empButton" onClick={getAllHotels}>
             View all hotels
           </button>
+
           {isManager && (
-            <button className="empButton detailButton" onClick={click}>
-              Update hotel
-            </button>
+            <>
+              <button className="empButton detailButton" onClick={click}>
+                Update hotel
+              </button>
+              <button className="empButton detailButton" onClick={click3}>
+                Delete Employee
+              </button>
+            </>
           )}
+          <button className="empButton detailButton" onClick={click2}>
+            Delete Customer
+          </button>
+          {canDeleteCustomer && (
+            <>
+              <DeleteCustomer />
+              {/* <ul className="employee-list">
+                {employee.map((hotel) => (
+                  <HotelListItem key={hotel.hotel_ID} hotel={hotel} />
+                ))}
+              </ul> */}
+            </>
+          )}
+
+          {canDeleteEmployee && <DeleteEmployee />}
           {canUpdate && <UpdateHotelForm />}
           {canViewHotels && (
             <ul className="hotels-list">
@@ -196,6 +339,16 @@ function HotelListItem({ hotel }) {
     </li>
   );
 }
+
+// function EmployeeListItem({ employee }) {
+//   return (
+//     <li key={employee.employe_ID} className="employee-item">
+//       <p className="employee-id">Hotel ID: {employee.employe_ID}</p>
+//       <p className="employee-name">Name: {employee.full_name}</p>
+//       <p className="employee-position">Address: {employee.position}</p>
+//     </li>
+//   );
+// }
 
 function LocationCard(props) {
   return (
