@@ -9,6 +9,7 @@ import Hotels from "./components/pages/hotels";
 import ViewProfile from "./components/pages/settings";
 import Search from "./components/pages/search";
 import SignUp from "./components/pages/signup";
+import Views from "./components/pages/views";
 
 import { useState, createContext, useEffect } from "react";
 
@@ -72,6 +73,9 @@ function App() {
               <NavBar />
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route exact path="/views">
+                <Views />
               </Route>
               <Route exact path="/about">
                 <About />

@@ -174,7 +174,6 @@ function SearchBar() {
     return true;
   }
   const getRooms = async () => {
-    console.log(1);
     fetch('http://localhost:3001/').then(response => {return response.text();})
       .then(data => {
         const obj = JSON.parse(data);
