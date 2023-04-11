@@ -285,7 +285,7 @@ app.get("/view1", (req, res) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
 
 app.get("/view2", (req, res) => {
   const sql = "SELECT * FROM capacity_of_all_rooms";
@@ -293,7 +293,37 @@ app.get("/view2", (req, res) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
   });
-})
+});
+
+// new added
+
+app.post("/deleteEmployee", (req, res) => {
+  let employee = req.body;
+  const sql =
+    "DELETE FROM employee WHERE employee_ID = " + employee.employee_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/deleteCustomer", (req, res) => {
+  let customer = req.body;
+  const sql =
+    "DELETE FROM customer WHERE customer_ID = " + customer.customer_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.get("/employee", (req, res) => {
+  const sql = "SELECT * FROM employee";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
