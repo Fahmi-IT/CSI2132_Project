@@ -6,8 +6,8 @@ const app = express();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "DanaRoot5!",
-  database: "MyLittleSchema",
+  password: "Gr8Expectat1ons",
+  database: "db_project",
 });
 
 const bodyParser = require("body-parser");
@@ -71,7 +71,7 @@ app.post("/bookingsMake", (req, res) => {
 // CHECKING IF CUSTOMER EXISTS IE SIGN IN PAGE
 app.post("/signIn", (req, res) => {
   let customer = req.body;
-  console.log(customer);
+  console.log(customer.SSN);
   const sql =
     "SELECT COUNT(full_name) FROM customer WHERE SSN =" + customer.SSN;
 
@@ -265,7 +265,7 @@ app.post("/getCusBookings", (req, res) => {
   let customer2 = req.body;
   // console.log("The SSN of customer is " + customer2.SSN);
   const sql =
-    "SELECT * FROM booking WHERE customer_ID = (SELECT customer_ID FROM customer WHERE SSN = " +
+    "SELECT * FROM booking WHERE customer_ID IN (SELECT customer_ID FROM customer WHERE SSN = " +
     customer2.SSN +
     ")";
   db.query(sql, (err, results) => {
