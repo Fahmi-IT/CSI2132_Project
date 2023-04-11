@@ -69,7 +69,7 @@ export const Login = (props) => {
           id="SSN"
           name="SSN"
         />
-        <button type="submit" onClick={handleClick}>
+        <button className="accountBtn" type="submit" onClick={handleClick}>
           Log In
         </button>
       </form>

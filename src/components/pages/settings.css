@@ -49,7 +49,7 @@ h4 {
   margin-bottom: 10px;
 }
 
-.button2 {
+.button {
   width: 170px;
   height: 70px;
   color: #fff;
@@ -69,7 +69,7 @@ h4 {
   font-size: 25px;
 }
 
-.btnStyle2 {
+.btnStyle {
   background-color: #1e78d7;
   border: none;
   z-index: 1;
@@ -78,7 +78,7 @@ h4 {
 .extraBut {
   margin-left: 10px;
 }
-.btnStyle2:after {
+.btnStyle:after {
   position: absolute;
   content: "";
   width: 100%;
@@ -94,14 +94,14 @@ h4 {
   transition: all 0.3s ease;
   /* padding: 0; */
 }
-.btnStyle2:hover {
+.btnStyle:hover {
   color: #fff;
 }
-.btnStyle2:hover:after {
+.btnStyle:hover:after {
   top: 0;
   height: 100%;
 }
-.btnStyle2:active {
+.btnStyle:active {
   top: 2px;
 }
 

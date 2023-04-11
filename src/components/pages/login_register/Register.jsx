@@ -62,7 +62,7 @@ export const Register = (props) => {
           id="address"
           name="address"
         />
-        <button type="submit" onClick={handleClick}>
+        <button className="accountBtn" type="submit" onClick={handleClick}>
           Register
         </button>
       </form>
