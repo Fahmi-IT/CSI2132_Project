@@ -6,8 +6,8 @@ const app = express();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Gr8Expectat1ons",
-  database: "db_project",
+  password: "DanaRoot5!",
+  database: "MyLittleSchema",
 });
 
 const bodyParser = require("body-parser");
@@ -260,9 +260,10 @@ app.put("/updateHotel", (req, res) => {
   });
 });
 
-// GET A CUSTOMER'S BOOKINGS
+// just added 2:53 pm
 app.post("/getCusBookings", (req, res) => {
   let customer2 = req.body;
+  // console.log("The SSN of customer is " + customer2.SSN);
   const sql =
     "SELECT * FROM booking WHERE customer_ID = (SELECT customer_ID FROM customer WHERE SSN = " +
     customer2.SSN +
@@ -270,6 +271,34 @@ app.post("/getCusBookings", (req, res) => {
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     console.log(results);
+    return res.json(results);
+  });
+});
+
+app.post("/deleteEmployee", (req, res) => {
+  let employee = req.body;
+  const sql =
+    "DELETE FROM employee WHERE employee_ID = " + employee.employee_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/deleteCustomer", (req, res) => {
+  let customer = req.body;
+  const sql =
+    "DELETE FROM customer WHERE customer_ID = " + customer.customer_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.get("/employee", (req, res) => {
+  const sql = "SELECT * FROM employee";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
     return res.json(results);
   });
 });
