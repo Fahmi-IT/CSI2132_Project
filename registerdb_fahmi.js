@@ -303,6 +303,34 @@ app.get("/employee", (req, res) => {
   });
 });
 
+app.post("/deleteEmployee", (req, res) => {
+  let employee = req.body;
+  const sql =
+    "DELETE FROM employee WHERE employee_ID = " + employee.employee_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/deleteCustomer", (req, res) => {
+  let customer = req.body;
+  const sql =
+    "DELETE FROM customer WHERE customer_ID = " + customer.customer_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.get("/employee", (req, res) => {
+  const sql = "SELECT * FROM employee";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
 app.listen(3001, () => {
