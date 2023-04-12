@@ -169,9 +169,9 @@ function Hotels() {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const employee_ID = formData.get("employee_ID");
+    const SSN = formData.get("SSN");
     const employee = {
-      employee_ID: employee_ID,
+      SSN: SSN,
     };
 
     try {
@@ -209,13 +209,8 @@ function Hotels() {
       <form className="update-hotel-form" onSubmit={deleteEmp}>
         <h3>Delete Employee</h3>
 
-        <label htmlFor="Address">Employee ID</label>
-        <input
-          type="text"
-          placeholder="employee_ID"
-          id="employee_ID"
-          name="employee_ID"
-        />
+        <label htmlFor="Address">Employee SSN</label>
+        <input type="text" placeholder="SSN" id="SSN" name="SSN" />
         <button className="updateBtn" type="submit">
           Delete Employee
         </button>
@@ -266,7 +261,7 @@ function Hotels() {
         <label htmlFor="Manager">Manager</label>
         <input type="text" placeholder="manager" id="manager" name="manager" />
         <button className="updateBtn" type="submit">
-          Update user information
+          Update Hotel Information
         </button>
       </form>
     );
