@@ -296,11 +296,12 @@ app.post("/deleteRoom", (req, res) => {
 
 app.post("/insertRoom", (req, res) => {
   let room = req.body;
+  console.log(room);
   const sql = 
-  "INSERT INTO room (room_number, price_per_night, amenities, capacity, view, extendable, problems, hotel_ID) VALUES (?, ?, ?, ?, ?, ?, ?)"
+  "INSERT INTO room (room_number, price_per_night, amenities, capacity, view, extendable, problems, hotel_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
   const values = [
     room.roomNumber, 
-    room.PPN, 
+    room.PPNe, 
     room.Amenities, 
     room.Capacity,
     room.View,
