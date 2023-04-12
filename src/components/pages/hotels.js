@@ -26,6 +26,8 @@ function Hotels() {
   const [canDeleteEmployee, setDeleteEmp] = useState("");
   const [canDeleteRoom, setDeleteRoom] = useState("");
   const [canInsertRoom, setInsertRoom] = useState("");
+  const [canInsertHotel, setInsertHotel] = useState("");
+  const [canDeleteHotel, setDeleteHotel] = useState("");
 
   useEffect(() => {
     if (!cus_emp && loggedIn) {
@@ -40,6 +42,8 @@ function Hotels() {
     setDeleteEmp(false);
     setDeleteRoom(false);
     setInsertRoom(false);
+    setInsertHotel(false);
+    setDeleteHotel(false);
   };
 
   const click2 = async (e) => {
@@ -49,6 +53,8 @@ function Hotels() {
     setCanViewHotels(false);
     setDeleteRoom(false);
     setInsertRoom(false);
+    setInsertHotel(false);
+    setDeleteHotel(false);
   };
 
   const click3 = async (e) => {
@@ -58,6 +64,8 @@ function Hotels() {
     setCanViewHotels(false);
     setDeleteRoom(false);
     setInsertRoom(false);
+    setInsertHotel(false);
+    setDeleteHotel(false);
   };
 
   const click4 = async (e) => {
@@ -67,6 +75,8 @@ function Hotels() {
     setCanViewHotels(false);
     setDeleteRoom(true);
     setInsertRoom(false);
+    setInsertHotel(false);
+    setDeleteHotel(false);
   }
 
   const click5 = async (e) => {
@@ -76,6 +86,30 @@ function Hotels() {
     setCanViewHotels(false);
     setDeleteRoom(false);
     setInsertRoom(true);
+    setInsertHotel(false);
+    setDeleteHotel(false);
+  }
+
+  const click6 = async (e) => {
+    setDeleteEmp(false);
+    setDeleteCus(false);
+    setCanUpdate(false);
+    setCanViewHotels(false);
+    setDeleteRoom(false);
+    setInsertRoom(false);
+    setInsertHotel(true);
+    setDeleteHotel(false);
+  }
+
+  const click7 = async (e) => {
+    setDeleteEmp(false);
+    setDeleteCus(false);
+    setCanUpdate(false);
+    setCanViewHotels(false);
+    setDeleteRoom(false);
+    setInsertRoom(false);
+    setInsertHotel(false);
+    setDeleteHotel(true);
   }
 
   const handleClickEmp = async () => {
@@ -247,6 +281,40 @@ function Hotels() {
     }
   }
 
+  const addHot = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const hotID = formData.get("hotel_ID");
+    const nom = formData.get("name");
+    const add = formData.get("address");
+    const SR = formData.get("star_rating");
+    const contact = formData.get("contact_email");
+    const num = formData.get("phone_number");
+    const mage = formData.get("manager");
+    const hotel = {
+      hotelID: hotID,
+      name: nom,
+      address: add,
+      starRating: SR,
+      contactEmail: contact,
+      phoneNumber: num,
+      manager: mage
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/insertHotel",
+        hotel
+      );
+      alert("Successfully inserted hotel.");
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      alert("Failed to insert hotel.");
+    }
+  }
+
   const deleteRom = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -271,6 +339,47 @@ function Hotels() {
     }
   };
 
+  const deleteHot = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const hotel_ID = formData.get("hotel_ID");
+    const hotel = {
+      hotelID: hotel_ID
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/deleteHotel",
+        hotel
+      );
+      alert("Successfully deleted hotel and corresponding rooms.");
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      alert("Failed to delete hotel and corresponding rooms.");
+    }
+  };
+
+  function DeleteHotel() {
+    return (
+      <form className="update-hotel-form" onSubmit={deleteHot}>
+        <h3>Delete Hotel</h3>
+
+        <label htmlFor="hotel_ID">Hotel ID</label>
+        <input
+          type="text"
+          placeholder="Hotel ID"
+          id="hotel_ID"
+          name="hotel_ID"
+        />
+        <button className="updateBtn" type="submit">
+          Delete Hotel
+        </button>
+      </form>
+    );
+  }
+  
   function DeleteCustomer() {
     return (
       <form className="update-hotel-form" onSubmit={deleteCus}>
@@ -391,6 +500,67 @@ function Hotels() {
     );
   }
 
+  function InsertHotel() {
+    return (
+      <form className="update-hotel-form" onSubmit={addHot}>
+        <h3>Insert Hotel</h3>
+
+        <label htmlFor="hotel_ID">Hotel ID</label>
+        <input
+          type="text"
+          placeholder="Hotel ID"
+          id="hotel_ID"
+          name="hotel_ID"
+        />
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          placeholder="Name"
+          id="name"
+          name="name"
+        />
+        <label htmlFor="address">Address</label>
+        <input
+          type="text"
+          placeholder="Address"
+          id="address"
+          name="address"
+        />
+        <label htmlFor="star_rating">Star Rating</label>
+        <input
+          type="number"
+          placeholder="Star Rating"
+          id="star_rating"
+          name="star_rating"
+        />
+        <label htmlFor="contact_email">Contact Email</label>
+        <input
+          type="text"
+          placeholder="Contact Email"
+          id="contact_email"
+          name="contact_email"
+        />
+        <label htmlFor="phone_number">Phone Number</label>
+        <input
+          type="text"
+          placeholder="Phone Number"
+          id="phone_number"
+          name="phone_number"
+        />
+        <label htmlFor="manager">Manager Name</label>
+        <input
+          type="text"
+          placeholder="Manager Name"
+          id="manager"
+          name="manager"
+        />
+        <button className="updateBtn" type="submit">
+          Insert Hotel
+        </button>
+      </form>
+    );
+  }
+
   function UpdateHotelForm() {
     return (
       <form className="update-hotel-form" onSubmit={updateHotel}>
@@ -470,6 +640,12 @@ function Hotels() {
               <button className="empButton detailButton" onClick={click5}>
                 Add Room
               </button>
+              <button className="empButton detailButton" onClick={click6}>
+                Add Hotel
+              </button>
+              <button className="empButton detailButton" onClick={click7}>
+                Delete Hotel
+              </button>
             </>
           )}
           <button className="empButton detailButton" onClick={click2}>
@@ -490,6 +666,8 @@ function Hotels() {
           {canUpdate && <UpdateHotelForm />}
           {canDeleteRoom && <DeleteRoom />}
           {canInsertRoom && <InsertRoom />}
+          {canInsertHotel && <InsertHotel />}
+          {canDeleteHotel && <DeleteHotel />}
           {canViewHotels && (
             <ul className="hotels-list">
               {hotels.map((hotel) => (
