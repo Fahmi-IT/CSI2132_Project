@@ -285,6 +285,37 @@ app.post("/deleteEmployee", (req, res) => {
   });
 });
 
+app.post("/deleteRoom", (req, res) => {
+  let room = req.body;
+  const sql =
+    "DELETE FROM room WHERE room_number = " + room.roomNumber + " AND hotel_ID = " + room.hotelID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/insertRoom", (req, res) => {
+  let room = req.body;
+  const sql = 
+  "INSERT INTO room (room_number, price_per_night, amenities, capacity, view, extendable, problems, hotel_ID) VALUES (?, ?, ?, ?, ?, ?, ?)"
+  const values = [
+    room.roomNumber, 
+    room.PPN, 
+    room.Amenities, 
+    room.Capacity,
+    room.View,
+    room.Extend, 
+    room.Problems, 
+    room.hotelID
+  ];
+  
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
 app.post("/deleteCustomer", (req, res) => {
   let customer = req.body;
   const sql =
