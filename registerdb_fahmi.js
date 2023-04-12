@@ -53,9 +53,8 @@ app.post("/bookingsMake", (req, res) => {
   let booking = req.body;
   console.log(booking);
   const sql =
-    "INSERT INTO booking (booking_ID, room_number, start_date, end_date, customer_ID) VALUES (?, ?, ?, ?, ?);";
+    "INSERT INTO booking (room_number, start_date, end_date, customer_ID) VALUES (?, ?, ?, ?);";
   const values = [
-    booking.booking_ID,
     booking.room_number,
     new Date(booking.start_date.toString()),
     new Date(booking.end_date.toString()),
