@@ -295,7 +295,7 @@ function SearchBar() {
       let start = new Date(content.startY, content.startM, content.startD);
       let end = new Date(content.endY, content.endM, content.endD);
       console.log(start);
-      const bookingMan = {booking_ID: "00007", room_number: number, start_date: start, end_date: end, customer_id: customerID}
+      const bookingMan = {booking_ID: "00011", room_number: number, start_date: start, end_date: end, customer_id: customerID}
       try {
         await axios.post("http://localhost:3001/bookingsMake", bookingMan);
         console.log("Booking added");

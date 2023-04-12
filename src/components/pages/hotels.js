@@ -250,7 +250,7 @@ function Hotels() {
     const form = e.target;
     const formData = new FormData(form);
     const room_Number = formData.get("room_Number");
-    const PPN = formData.get("price_per_night");
+    const PPN = formData.get("ppn");
     const view = formData.get("view");
     const extend = formData.get("extend");
     const amenities = formData.get("amenities");
@@ -258,13 +258,13 @@ function Hotels() {
     const problems = formData.get("problems");
     const hotel_ID = formData.get("hotel_ID");
     const room = {
-      roomNumber: room_Number,
+      roomNumber: parseInt(room_Number),
       hotelID: hotel_ID,
-      PPN: PPN,
-      View: view,
-      Extend: extend,
+      PPNe: parseFloat(PPN),
+      View: parseInt(view),
+      Extend: parseInt(extend),
       Amenities: amenities,
-      Capacity: capacity,
+      Capacity: parseInt(capacity),
       Problems: problems
     };
 
@@ -457,6 +457,13 @@ function Hotels() {
           placeholder="Price Per Night"
           id="ppn"
           name="ppn"
+        />
+        <label htmlFor="view">View</label>
+        <input
+          type="number"
+          placeholder="View"
+          id="view"
+          name="view"
         />
         <label htmlFor="amen">Amenities</label>
         <input
