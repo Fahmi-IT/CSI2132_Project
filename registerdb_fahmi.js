@@ -277,8 +277,7 @@ app.post("/getCusBookings", (req, res) => {
 
 app.post("/deleteEmployee", (req, res) => {
   let employee = req.body;
-  const sql =
-    "DELETE FROM employee WHERE employee_ID = " + employee.employee_ID;
+  const sql = "DELETE FROM employee WHERE SSN = " + employee.SSN;
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     return res.json(results);
