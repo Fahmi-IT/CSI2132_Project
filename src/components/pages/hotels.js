@@ -77,7 +77,7 @@ function Hotels() {
     setInsertRoom(false);
     setInsertHotel(false);
     setDeleteHotel(false);
-  }
+  };
 
   const click5 = async (e) => {
     setDeleteEmp(false);
@@ -88,7 +88,7 @@ function Hotels() {
     setInsertRoom(true);
     setInsertHotel(false);
     setDeleteHotel(false);
-  }
+  };
 
   const click6 = async (e) => {
     setDeleteEmp(false);
@@ -99,7 +99,7 @@ function Hotels() {
     setInsertRoom(false);
     setInsertHotel(true);
     setDeleteHotel(false);
-  }
+  };
 
   const click7 = async (e) => {
     setDeleteEmp(false);
@@ -110,7 +110,7 @@ function Hotels() {
     setInsertRoom(false);
     setInsertHotel(false);
     setDeleteHotel(true);
-  }
+  };
 
   const handleClickEmp = async () => {
     try {
@@ -135,32 +135,6 @@ function Hotels() {
       console.log(err);
     }
   };
-
-  // const getAllEmployees = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:3001/employee");
-  //     setHotels(response.data);
-  //     setCanViewHotels(true);
-  //     setCanUpdate(false);
-  //     setDeleteCus(false);
-  //     setDeleteEmp(false);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const getAllCustomers = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:3001/getCustomers");
-  //     setHotels(response.data);
-  //     setCanViewHotels(true);
-  //     setCanUpdate(false);
-  //     setDeleteCus(false);
-  //     setDeleteEmp(false);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   const getAllHotels = async () => {
     try {
@@ -265,7 +239,7 @@ function Hotels() {
       Extend: parseInt(extend),
       Amenities: amenities,
       Capacity: parseInt(capacity),
-      Problems: problems
+      Problems: problems,
     };
 
     try {
@@ -279,7 +253,7 @@ function Hotels() {
       console.log(err);
       alert("Failed to insert room.");
     }
-  }
+  };
 
   const addHot = async (e) => {
     e.preventDefault();
@@ -292,6 +266,7 @@ function Hotels() {
     const contact = formData.get("contact_email");
     const num = formData.get("phone_number");
     const mage = formData.get("manager");
+    const number_of_rooms = formData.get("number_of_rooms");
     const hotel = {
       hotelID: hotID,
       name: nom,
@@ -299,7 +274,8 @@ function Hotels() {
       starRating: SR,
       contactEmail: contact,
       phoneNumber: num,
-      manager: mage
+      number_of_rooms: number_of_rooms,
+      manager: mage,
     };
 
     try {
@@ -313,7 +289,7 @@ function Hotels() {
       console.log(err);
       alert("Failed to insert hotel.");
     }
-  }
+  };
 
   const deleteRom = async (e) => {
     e.preventDefault();
@@ -323,7 +299,7 @@ function Hotels() {
     const hotel_ID = formData.get("hotel_ID");
     const room = {
       roomNumber: room_Number,
-      hotelID: hotel_ID
+      hotelID: hotel_ID,
     };
 
     try {
@@ -345,7 +321,7 @@ function Hotels() {
     const formData = new FormData(form);
     const hotel_ID = formData.get("hotel_ID");
     const hotel = {
-      hotelID: hotel_ID
+      hotel_ID: hotel_ID,
     };
 
     try {
@@ -379,7 +355,7 @@ function Hotels() {
       </form>
     );
   }
-  
+
   function DeleteCustomer() {
     return (
       <form className="update-hotel-form" onSubmit={deleteCus}>
@@ -459,12 +435,7 @@ function Hotels() {
           name="ppn"
         />
         <label htmlFor="view">View</label>
-        <input
-          type="number"
-          placeholder="View"
-          id="view"
-          name="view"
-        />
+        <input type="number" placeholder="View" id="view" name="view" />
         <label htmlFor="amen">Amenities</label>
         <input
           type="text"
@@ -520,25 +491,22 @@ function Hotels() {
           name="hotel_ID"
         />
         <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          placeholder="Name"
-          id="name"
-          name="name"
-        />
+        <input type="text" placeholder="Name" id="name" name="name" />
         <label htmlFor="address">Address</label>
-        <input
-          type="text"
-          placeholder="Address"
-          id="address"
-          name="address"
-        />
+        <input type="text" placeholder="Address" id="address" name="address" />
         <label htmlFor="star_rating">Star Rating</label>
         <input
           type="number"
           placeholder="Star Rating"
           id="star_rating"
           name="star_rating"
+        />
+        <label htmlFor="star_rating">Number of Rooms</label>
+        <input
+          type="number"
+          placeholder="number_of_rooms"
+          id="number_of_rooms"
+          name="number_of_rooms"
         />
         <label htmlFor="contact_email">Contact Email</label>
         <input
@@ -616,8 +584,6 @@ function Hotels() {
       </form>
     );
   }
-
-
 
   return (
     <>
