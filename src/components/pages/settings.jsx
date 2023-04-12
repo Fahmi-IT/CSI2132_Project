@@ -164,13 +164,10 @@ function ViewProfile() {
           <h3 className="infoTitle">Welcome Employee!</h3> Press to view or
           update your profile information <br></br>
           {message && <p>{message}</p>}
-          <button className="button2 btnStyle2" onClick={handleClickEmp}>
+          <button className="button btnStyle" onClick={handleClickEmp}>
             View
           </button>
-          <button
-            className="button2 btnStyle2 extraBut"
-            onClick={handleEmpClick}
-          >
+          <button className="button btnStyle extraBut" onClick={handleEmpClick}>
             Update
           </button>
           {employeeUpdate && <EmployeeUpdateForm updateEmp={updateEmp} />}

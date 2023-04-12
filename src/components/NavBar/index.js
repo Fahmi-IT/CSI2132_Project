@@ -36,15 +36,14 @@ const NavBar = () => {
             Settings
           </NavLink>
           {loggedIn ? (
-            <button onClick={signOut}>Sign Out</button>
+            <button className="SignOutButton" onClick={signOut}>
+              Sign Out
+            </button>
           ) : (
             <NavLink to="/signup" activeStyle>
               Sign In
             </NavLink>
           )}
-          {/* <NavLink to="/signup" activeStyle>
-            Sign In
-          </NavLink> */}
         </NavMenu>
       </Nav>
     </>

@@ -106,12 +106,12 @@ body {
   font-size: 30px;
 }
 
-.btnStyle {
+.btnStyle1 {
   background-color: #1e78d7;
   border: none;
   z-index: 1;
 }
-.btnStyle:after {
+.btnStyle1:after {
   position: absolute;
   content: "";
   width: 100%;
@@ -126,13 +126,13 @@ body {
     7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
   transition: all 0.3s ease;
 }
-.btnStyle:hover {
+.btnStyle1:hover {
   color: #fff;
 }
-.btnStyle:hover:after {
+.btnStyle1:hover:after {
   top: 0;
   height: 100%;
 }
-.btnStyle:active {
+.btnStyle1:active {
   top: 2px;
 }
