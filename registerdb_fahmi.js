@@ -315,6 +315,46 @@ app.post("/insertRoom", (req, res) => {
   });
 })
 
+app.post("/insertHotel", (req, res) => {
+  let hotel = req.body;
+  const sql = 
+  "INSERT INTO hotel (hotel_ID, name, address, star_rating, contact_email, phone_number, number_of_rooms, manager) VALUES (?, ?, ?, ?, ?, ?, 1, ?)"
+  const values = [
+    hotel.hotelID,
+    hotel.name,
+    hotel.address,
+    hotel.starRating,
+    hotel.contactEmail,
+    hotel.phoneNumber, 
+    hotel.manager
+  ];
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
+app.post("/deleteHotel", (req, res) => {
+  let hotel = req.body;
+  const sql = "DELETE FROM hotel WHERE hotel_ID = " + hotel.hotel_ID
+  db.query(sql, (err, results) => {
+    if (err) {
+      return res.json({ error: err.message });
+    } else {
+      console.log(res.json(results));
+      const sql2 = "DELETE FROM room WHERE hotel_ID = " + hotel.hotel_ID;
+      db.query(sql, (err, results2) => {
+        if (err) {
+          return res.json(results2);
+        } else {
+          return res.json(results2);
+        }
+      });
+      return res.json(results);
+    }
+  });
+})
+
 app.post("/deleteCustomer", (req, res) => {
   let customer = req.body;
   const sql =

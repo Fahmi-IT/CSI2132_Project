@@ -49,10 +49,29 @@ app.post("/customers", (req, res) => {
   });
 });
 
+app.post("/bookingsMake", (req, res) => {
+  let booking = req.body;
+  console.log(booking);
+  const sql =
+    "INSERT INTO booking (booking_ID, room_number, start_date, end_date, customer_ID) VALUES (?, ?, ?, ?, ?);";
+  const values = [
+    booking.booking_ID,
+    booking.room_number,
+    new Date(booking.start_date.toString()),
+    new Date(booking.end_date.toString()),
+    booking.customer_id,
+  ];
+
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
 // CHECKING IF CUSTOMER EXISTS IE SIGN IN PAGE
 app.post("/signIn", (req, res) => {
   let customer = req.body;
-  console.log(customer);
+  console.log(customer.SSN);
   const sql =
     "SELECT COUNT(full_name) FROM customer WHERE SSN =" + customer.SSN;
 
@@ -142,10 +161,250 @@ app.get("/bookings", (req, res) => {
   });
 });
 
+app.get("/rentings", (req, res) => {
+  const sql = "SELECT * FROM renting";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/insertRenting", (req, res) => {
+  let renting = req.body;
+  console.log(renting.room_number);
+  console.log(renting.check_in_date);
+  console.log(renting.check_out_date);
+  console.log(renting.booking_ID);
+  console.log(renting.customer_ID);
+
+  const sql =
+    "INSERT INTO renting (room_number, check_in_date, check_out_date, booking_ID, customer_ID) VALUES (?, ?, ?, ?, ?);";
+  const values = [
+    renting.room_number,
+    renting.check_in_date,
+    renting.check_out_date,
+    renting.booking_ID,
+    renting.customer_ID,
+  ];
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
+app.get("/view1", (req, res) => {
+  const sql = "SELECT * FROM available_rooms_per_area";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.get("/view2", (req, res) => {
+  const sql = "SELECT * FROM capacity_of_all_rooms";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/bookingsMake", (req, res) => {
+  let booking = req.body;
+  console.log(booking);
+  const sql =
+    "INSERT INTO booking (booking_ID, room_number, start_date, end_date, customer_ID) VALUES (?, ?, ?, ?, ?);";
+  const values = [
+    booking.booking_ID,
+    booking.room_number,
+    new Date(booking.start_date.toString()),
+    new Date(booking.end_date.toString()),
+    booking.customer_id,
+  ];
+
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+// GET ALL BOOKINGS (EMPLOYEE)
+app.get("/getBookings", (req, res) => {
+  const sql = "SELECT * FROM booking";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+// UPDATE HOTEL INFO
+app.put("/updateHotel", (req, res) => {
+  let hotelInfo = req.body;
+  const sql =
+    "UPDATE hotel SET address = '" +
+    hotelInfo.address +
+    "', star_rating = '" +
+    hotelInfo.star_rating +
+    "', contact_email = '" +
+    hotelInfo.contact_email +
+    "', number_of_rooms = '" +
+    hotelInfo.number_of_rooms +
+    "', manager = '" +
+    hotelInfo.manager +
+    "' WHERE hotel_ID = " +
+    hotelInfo.hotel_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
+// just added 2:53 pm
+app.post("/getCusBookings", (req, res) => {
+  let customer2 = req.body;
+  // console.log("The SSN of customer is " + customer2.SSN);
+  const sql =
+    "SELECT * FROM booking WHERE customer_ID IN (SELECT customer_ID FROM customer WHERE SSN = " +
+    customer2.SSN +
+    ")";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
+app.post("/deleteEmployee", (req, res) => {
+  let employee = req.body;
+  const sql = "DELETE FROM employee WHERE SSN = " + employee.SSN;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/deleteRoom", (req, res) => {
+  let room = req.body;
+  const sql =
+    "DELETE FROM room WHERE room_number = " + room.roomNumber + " AND hotel_ID = " + room.hotelID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/insertRoom", (req, res) => {
+  let room = req.body;
+  const sql = 
+  "INSERT INTO room (room_number, price_per_night, amenities, capacity, view, extendable, problems, hotel_ID) VALUES (?, ?, ?, ?, ?, ?, ?)"
+  const values = [
+    room.roomNumber, 
+    room.PPN, 
+    room.Amenities, 
+    room.Capacity,
+    room.View,
+    room.Extend, 
+    room.Problems, 
+    room.hotelID
+  ];
+  
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
+app.post("/insertHotel", (req, res) => {
+  let hotel = req.body;
+  const sql = 
+  "INSERT INTO hotel (hotel_ID, name, address, star_rating, contact_email, phone_number, number_of_rooms, manager) VALUES (?, ?, ?, ?, ?, ?, 1, ?)"
+  const values = [
+    hotel.hotelID,
+    hotel.name,
+    hotel.address,
+    hotel.starRating,
+    hotel.contactEmail,
+    hotel.phoneNumber, 
+    hotel.manager
+  ];
+  db.query(sql, values, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+})
+
+app.post("/deleteHotel", (req, res) => {
+  let hotel = req.body;
+  const sql = "DELETE FROM hotel WHERE hotel_ID = " + hotel.hotel_ID
+  db.query(sql, (err, results) => {
+    if (err) {
+      return res.json({ error: err.message });
+    } else {
+      console.log(res.json(results));
+      const sql2 = "DELETE FROM room WHERE hotel_ID = " + hotel.hotel_ID;
+      db.query(sql, (err, results2) => {
+        if (err) {
+          return res.json(results2);
+        } else {
+          return res.json(results2);
+        }
+      });
+      return res.json(results);
+    }
+  });
+})
+
+app.post("/deleteCustomer", (req, res) => {
+  let customer = req.body;
+  const sql =
+    "DELETE FROM customer WHERE customer_ID = " + customer.customer_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.get("/employee", (req, res) => {
+  const sql = "SELECT * FROM employee";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/deleteEmployee", (req, res) => {
+  let employee = req.body;
+  const sql =
+    "DELETE FROM employee WHERE employee_ID = " + employee.employee_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.post("/deleteCustomer", (req, res) => {
+  let customer = req.body;
+  const sql =
+    "DELETE FROM customer WHERE customer_ID = " + customer.customer_ID;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
+app.get("/employee", (req, res) => {
+  const sql = "SELECT * FROM employee";
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    return res.json(results);
+  });
+});
+
 // UPDATE INFO ABOUT EMPLOYEE
 app.put("/updateEmployee", (req, res) => {
   let employee = req.body;
-  console.log("here ya go " + employee.full_name);
+  // console.log("here ya go " + employee.full_name);
   const sql =
     "UPDATE employee SET address = '" +
     employee.address +
@@ -176,151 +435,6 @@ app.put("/updateCustomer", (req, res) => {
   db.query(sql, (err, results) => {
     if (err) return res.json({ error: err.message });
     console.log(results);
-    return res.json(results);
-  });
-});
-
-// GET A CUSTOMER'S BOOKINGS
-app.post("/getCusBookings", (req, res) => {
-  let customer2 = req.body;
-  // console.log("The SSN of customer is " + customer2.SSN);
-  const sql =
-    "SELECT * FROM booking WHERE customer_ID = (SELECT customer_ID FROM customer WHERE SSN = " +
-    customer2.SSN +
-    ")";
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    console.log(results);
-    return res.json(results);
-  });
-});
-
-// GET ALL BOOKINGS (EMPLOYEE)
-app.get("/getBookings", (req, res) => {
-  const sql = "SELECT * FROM booking";
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    return res.json(results);
-  });
-});
-
-app.get("/rentings", (req, res) => {
-  const sql = "SELECT * FROM renting";
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    return res.json(results);
-  });
-});
-
-// MAKE A RENTING
-app.post("/insertRenting", (req, res) => {
-  let renting = req.body;
-  console.log(renting.room_number);
-  console.log(renting.check_in_date);
-  console.log(renting.check_out_date);
-  console.log(renting.booking_ID);
-  console.log(renting.customer_ID);
-
-  const sql =
-    "INSERT INTO renting (room_number, check_in_date, check_out_date, booking_ID, customer_ID) VALUES (?, ?, ?, ?, ?);";
-  const values = [
-    renting.room_number,
-    renting.check_in_date,
-    renting.check_out_date,
-    renting.booking_ID,
-    renting.customer_ID,
-  ];
-  db.query(sql, values, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    console.log(results);
-    return res.json(results);
-  });
-});
-
-app.post("/bookingsMake", (req, res) => {
-  let booking = req.body;
-  console.log(booking);
-  const sql =
-    "INSERT INTO booking (booking_ID, room_number, start_date, end_date, customer_ID) VALUES (?, ?, ?, ?, ?);";
-  const values = [
-    booking.booking_ID,
-    booking.room_number,
-    new Date(booking.start_date.toString()),
-    new Date(booking.end_date.toString()),
-    booking.customer_id,
-  ];
-
-  db.query(sql, values, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    return res.json(results);
-  });
-});
-
-// UPDATE HOTEL INFO
-app.put("/updateHotel", (req, res) => {
-  let hotelInfo = req.body;
-  const sql =
-    "UPDATE hotel SET address = '" +
-    hotelInfo.address +
-    "', star_rating = '" +
-    hotelInfo.star_rating +
-    "', contact_email = '" +
-    hotelInfo.contact_email +
-    "', number_of_rooms = '" +
-    hotelInfo.number_of_rooms +
-    "', manager = '" +
-    hotelInfo.manager +
-    "' WHERE hotel_ID = " +
-    hotelInfo.hotel_ID;
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    console.log(results);
-    return res.json(results);
-  });
-});
-
-app.get("/view1", (req, res) => {
-  const sql = "SELECT * FROM available_rooms_per_area";
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    return res.json(results);
-  });
-});
-
-app.get("/view2", (req, res) => {
-  const sql = "SELECT * FROM capacity_of_all_rooms";
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    return res.json(results);
-  });
-});
-
-// new added
-
-app.post("/deleteEmployee", (req, res) => {
-  let employee = req.body;
-  const sql =
-    "DELETE FROM employee WHERE employee_ID = " + employee.employee_ID;
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    return res.json(results);
-  });
-});
-
-app.post("/deleteCustomer", (req, res) => {
-  let customer = req.body;
-  const sql =
-    "DELETE FROM customer WHERE customer_ID = " + customer.customer_ID;
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
-    return res.json(results);
-  });
-});
-
-app.get("/employee", (req, res) => {
-  const sql = "SELECT * FROM employee";
-  db.query(sql, (err, results) => {
-    if (err) return res.json({ error: err.message });
     return res.json(results);
   });
 });
