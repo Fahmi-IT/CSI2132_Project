@@ -24,6 +24,8 @@ function Hotels() {
   const [isManager, setManager] = useState("");
   const [canDeleteCustomer, setDeleteCus] = useState("");
   const [canDeleteEmployee, setDeleteEmp] = useState("");
+  const [canDeleteRoom, setDeleteRoom] = useState("");
+  const [canInsertRoom, setInsertRoom] = useState("");
 
   useEffect(() => {
     if (!cus_emp && loggedIn) {
@@ -36,6 +38,8 @@ function Hotels() {
     setCanViewHotels(false);
     setDeleteCus(false);
     setDeleteEmp(false);
+    setDeleteRoom(false);
+    setInsertRoom(false);
   };
 
   const click2 = async (e) => {
@@ -43,6 +47,8 @@ function Hotels() {
     setDeleteEmp(false);
     setCanUpdate(false);
     setCanViewHotels(false);
+    setDeleteRoom(false);
+    setInsertRoom(false);
   };
 
   const click3 = async (e) => {
@@ -50,7 +56,27 @@ function Hotels() {
     setDeleteCus(false);
     setCanUpdate(false);
     setCanViewHotels(false);
+    setDeleteRoom(false);
+    setInsertRoom(false);
   };
+
+  const click4 = async (e) => {
+    setDeleteEmp(false);
+    setDeleteCus(false);
+    setCanUpdate(false);
+    setCanViewHotels(false);
+    setDeleteRoom(true);
+    setInsertRoom(false);
+  }
+
+  const click5 = async (e) => {
+    setDeleteEmp(false);
+    setDeleteCus(false);
+    setCanUpdate(false);
+    setCanViewHotels(false);
+    setDeleteRoom(false);
+    setInsertRoom(true);
+  }
 
   const handleClickEmp = async () => {
     try {
@@ -185,6 +211,66 @@ function Hotels() {
     }
   };
 
+  const addRom = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const room_Number = formData.get("room_Number");
+    const PPN = formData.get("price_per_night");
+    const view = formData.get("view");
+    const extend = formData.get("extend");
+    const amenities = formData.get("amenities");
+    const capacity = formData.get("capacity");
+    const problems = formData.get("problems");
+    const hotel_ID = formData.get("hotel_ID");
+    const room = {
+      roomNumber: room_Number,
+      hotelID: hotel_ID,
+      PPN: PPN,
+      View: view,
+      Extend: extend,
+      Amenities: amenities,
+      Capacity: capacity,
+      Problems: problems
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/insertRoom",
+        room
+      );
+      alert("Successfully inserted room.");
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      alert("Failed to insert room.");
+    }
+  }
+
+  const deleteRom = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const room_Number = formData.get("room_Number");
+    const hotel_ID = formData.get("hotel_ID");
+    const room = {
+      roomNumber: room_Number,
+      hotelID: hotel_ID
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/deleteRoom",
+        room
+      );
+      alert("Successfully deleted room.");
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      alert("Failed to delete room.");
+    }
+  };
+
   function DeleteCustomer() {
     return (
       <form className="update-hotel-form" onSubmit={deleteCus}>
@@ -218,6 +304,93 @@ function Hotels() {
         />
         <button className="updateBtn" type="submit">
           Delete Employee
+        </button>
+      </form>
+    );
+  }
+
+  function DeleteRoom() {
+    return (
+      <form className="update-hotel-form" onSubmit={deleteRom}>
+        <h3>Delete Room</h3>
+
+        <label htmlFor="room_Number">Room Number</label>
+        <input
+          type="number"
+          placeholder="Room Number"
+          id="room_Number"
+          name="room_Number"
+        />
+        <label htmlFor="hotel_ID">Hotel ID</label>
+        <input
+          type="text"
+          placeholder="Hotel ID"
+          id="hotel_ID"
+          name="hotel_ID"
+        />
+        <button className="updateBtn" type="submit">
+          Delete Room
+        </button>
+      </form>
+    );
+  }
+
+  function InsertRoom() {
+    return (
+      <form className="update-hotel-form" onSubmit={addRom}>
+        <h3>Insert Room</h3>
+
+        <label htmlFor="room_Number">Room Number</label>
+        <input
+          type="number"
+          placeholder="Room Number"
+          id="room_Number"
+          name="room_Number"
+        />
+        <label htmlFor="ppn">Price Per Night</label>
+        <input
+          type="number"
+          placeholder="Price Per Night"
+          id="ppn"
+          name="ppn"
+        />
+        <label htmlFor="amen">Amenities</label>
+        <input
+          type="text"
+          placeholder="Amenities"
+          id="amenities"
+          name="amenities"
+        />
+        <label htmlFor="cap">Capacity</label>
+        <input
+          type="number"
+          placeholder="Capacity"
+          id="capacity"
+          name="capacity"
+        />
+        <label htmlFor="extend">Extendable</label>
+        <input
+          type="number"
+          placeholder="Extendable"
+          id="extend"
+          name="extend"
+        />
+        <label htmlFor="prob">Problems</label>
+        <input
+          type="text"
+          placeholder="Problems"
+          id="problems"
+          name="problems"
+        />
+        <label htmlFor="hotel_ID">Hotel ID</label>
+        <input
+          type="text"
+          placeholder="Hotel ID"
+          id="hotel_ID"
+          name="hotel_ID"
+        />
+        <button className="updateBtn" type="submit">
+          Insert Room
         </button>
       </form>
     );
@@ -272,6 +445,8 @@ function Hotels() {
     );
   }
 
+
+
   return (
     <>
       {cus_emp === true || loggedIn === false ? (
@@ -294,6 +469,12 @@ function Hotels() {
               <button className="empButton detailButton" onClick={click3}>
                 Delete Employee
               </button>
+              <button className="empButton detailButton" onClick={click4}>
+                Delete Room
+              </button>
+              <button className="empButton detailButton" onClick={click5}>
+                Add Room
+              </button>
             </>
           )}
           <button className="empButton detailButton" onClick={click2}>
@@ -312,6 +493,8 @@ function Hotels() {
 
           {canDeleteEmployee && <DeleteEmployee />}
           {canUpdate && <UpdateHotelForm />}
+          {canDeleteRoom && <DeleteRoom />}
+          {canInsertRoom && <InsertRoom />}
           {canViewHotels && (
             <ul className="hotels-list">
               {hotels.map((hotel) => (
