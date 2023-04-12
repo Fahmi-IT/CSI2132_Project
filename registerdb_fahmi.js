@@ -331,6 +331,44 @@ app.get("/employee", (req, res) => {
   });
 });
 
+// UPDATE INFO ABOUT EMPLOYEE
+app.put("/updateEmployee", (req, res) => {
+  let employee = req.body;
+  // console.log("here ya go " + employee.full_name);
+  const sql =
+    "UPDATE employee SET address = '" +
+    employee.address +
+    "', full_name = '" +
+    employee.full_name +
+    "', position = '" +
+    employee.position +
+    "' WHERE SSN = " +
+    employee.SSN;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
+// UPDATE INFO ABOUT CUSTOMER
+app.put("/updateCustomer", (req, res) => {
+  let customer = req.body;
+  console.log("here ya go " + customer.full_name);
+  const sql =
+    "UPDATE customer SET address = '" +
+    customer.address +
+    "', full_name = '" +
+    customer.full_name +
+    "' WHERE SSN = " +
+    customer.SSN;
+  db.query(sql, (err, results) => {
+    if (err) return res.json({ error: err.message });
+    console.log(results);
+    return res.json(results);
+  });
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF PT2
 app.listen(3001, () => {
